@@ -23,7 +23,7 @@ const Header = () => {
             <Title>Welcome To Forum</Title>
             <Text>Internet Forum for Everyone!!!</Text>
             <Search>
-              <Input type="text" />
+              <Input type="text" placeholder="Enter a keyword..." />
               <Button>
                 <i className="fas fa-search"></i>
               </Button>

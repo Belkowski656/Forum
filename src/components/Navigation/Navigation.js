@@ -12,7 +12,7 @@ import {
 } from "./Navigation.style";
 
 const Navigation = () => {
-  const [hamburger, setHamburger] = useState(true);
+  const [hamburger, setHamburger] = useState(false);
 
   return (
     <>
