@@ -1,5 +1,11 @@
+import Navigation from "../Navigation/Navigation";
+
 const Home = () => {
-  return <>Test</>;
+  return (
+    <>
+      <Navigation />
+    </>
+  );
 };
 
 export default Home;
