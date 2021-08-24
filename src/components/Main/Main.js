@@ -1,3 +1,5 @@
+import Table from "../Table/Table";
+
 import {
   Wrapper,
   StatsBox,
@@ -41,6 +43,7 @@ const Main = () => {
             </TextWrapper>
           </Box>
         </StatsBox>
+        <Table />
       </Wrapper>
     </>
   );

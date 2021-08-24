@@ -7,7 +7,7 @@ const Footer = () => {
         <Content>
           <Text>Copyright Forum</Text>
           <Up>
-            <i class="fas fa-arrow-up"></i>
+            <i className="fas fa-arrow-up"></i>
           </Up>
         </Content>
       </Wrapper>
