@@ -12,6 +12,8 @@ export const Wrapper = styled.main`
 `;
 
 export const StatsBox = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
   @media (min-width: 576px) {
     display: flex;
     justify-content: space-between;
@@ -74,6 +76,8 @@ export const Number = styled.p`
 
 export const Table = styled.table`
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 `;
 
 export const FirstRow = styled.tr``;
@@ -95,6 +99,10 @@ export const Th = styled.th`
     :nth-child(3),
     :nth-child(4) {
       visibility: visible;
+    }
+
+    :nth-child(4) {
+      text-align: right;
     }
   }
 `;

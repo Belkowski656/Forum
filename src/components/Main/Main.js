@@ -1,5 +1,3 @@
-import Row from "../Row/Row";
-
 import {
   Wrapper,
   StatsBox,
@@ -8,9 +6,6 @@ import {
   TextWrapper,
   Text,
   Number,
-  Table,
-  FirstRow,
-  Th,
 } from "./Main.style";
 
 const Main = () => {
@@ -46,23 +41,6 @@ const Main = () => {
             </TextWrapper>
           </Box>
         </StatsBox>
-        <Table>
-          <tbody>
-            <FirstRow>
-              <Th>Category</Th>
-              <Th>
-                <i className="fas fa-comment"></i>
-              </Th>
-              <Th>
-                <i className="fas fa-comments"></i>
-              </Th>
-              <Th>
-                <i className="far fa-clock"></i>
-              </Th>
-            </FirstRow>
-            <Row />
-          </tbody>
-        </Table>
       </Wrapper>
     </>
   );
