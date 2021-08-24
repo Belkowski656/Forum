@@ -3,7 +3,8 @@
 // import Register from "../Register/Register";
 // import Main from "../Main/Main";
 // import Footer from "../Footer/Footer";
-import Login from "../Login/Login";
+// import Login from "../Login/Login";
+import Signup from "../Signup/Signup";
 
 const Home = () => {
   return (
@@ -13,7 +14,8 @@ const Home = () => {
       <Register />
       <Main />
       <Footer /> */}
-      <Login />
+      {/* <Login /> */}
+      <Signup />
     </>
   );
 };
