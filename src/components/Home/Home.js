@@ -1,17 +1,19 @@
-import Navigation from "../Navigation/Navigation";
-import Header from "../Header/Header";
-import Register from "../Register/Register";
-import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
+// import Navigation from "../Navigation/Navigation";
+// import Header from "../Header/Header";
+// import Register from "../Register/Register";
+// import Main from "../Main/Main";
+// import Footer from "../Footer/Footer";
+import Login from "../Login/Login";
 
 const Home = () => {
   return (
     <>
-      <Navigation />
+      {/* <Navigation />
       <Header />
       <Register />
       <Main />
-      <Footer />
+      <Footer /> */}
+      <Login />
     </>
   );
 };
