@@ -16,6 +16,11 @@ export const Wrapper = styled.div`
   }
 `;
 
+export const Empty = styled.div`
+  height: 100px;
+  width: 100%;
+`;
+
 export const LogoWrapper = styled.div`
   padding: 30px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);

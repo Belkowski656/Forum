@@ -9,9 +9,10 @@ import {
   Search,
   Input,
   Button,
+  Empty,
 } from "./Header.style";
 
-const Header = () => {
+const Header = ({ title, text }) => {
   return (
     <>
       <Wrapper>
@@ -20,14 +21,18 @@ const Header = () => {
         </LogoWrapper>
         <Content>
           <Box>
-            <Title>Welcome To Forum</Title>
-            <Text>Internet Forum for Everyone!!!</Text>
-            <Search>
-              <Input type="text" placeholder="Enter a keyword..." />
-              <Button>
-                <i className="fas fa-search"></i>
-              </Button>
-            </Search>
+            <Title>{title.length ? title : "Welcome To Forum"}</Title>
+            <Text>{text.length ? text : "Internet Forum for Everyone!!!"}</Text>
+            {title.length ? (
+              <Empty />
+            ) : (
+              <Search>
+                <Input type="text" placeholder="Enter a keyword..." />
+                <Button>
+                  <i className="fas fa-search"></i>
+                </Button>
+              </Search>
+            )}
           </Box>
         </Content>
       </Wrapper>
