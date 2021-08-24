@@ -6,7 +6,7 @@ import {
   lightGray,
 } from "../../resources/variables/variables";
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.footer`
   background-color: ${gray};
   color: ${lightGray};
 `;
