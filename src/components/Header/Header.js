@@ -12,7 +12,7 @@ import {
   Empty,
 } from "./Header.style";
 
-const Header = ({ title, text }) => {
+const Header = ({ title, text, type }) => {
   return (
     <>
       <Wrapper>
@@ -21,9 +21,9 @@ const Header = ({ title, text }) => {
         </LogoWrapper>
         <Content>
           <Box>
-            <Title>{title.length ? title : "Welcome To Forum"}</Title>
-            <Text>{text.length ? text : "Internet Forum for Everyone!!!"}</Text>
-            {title.length ? (
+            <Title>{title}</Title>
+            <Text>{text}</Text>
+            {type === "forum" || type === "topic" ? (
               <Empty />
             ) : (
               <Search>

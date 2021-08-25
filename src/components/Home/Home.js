@@ -8,7 +8,11 @@ const Home = () => {
   return (
     <>
       <Navigation />
-      <Header />
+      <Header
+        type={"home"}
+        title={"Welcome to Forum"}
+        text={"Internet Forum for Everyone!!!"}
+      />
       <Register />
       <Main />
       <Footer />

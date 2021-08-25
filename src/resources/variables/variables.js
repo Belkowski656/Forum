@@ -1,6 +1,7 @@
 export const blue = "#1d84b5";
 export const gray = "#364253";
 export const lightGray = "#bdc3b7";
+export const lightGrayFont = "#6b717e";
 export const red = "#ff5a5f";
 
 export const fontHuge = "38px";

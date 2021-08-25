@@ -10,6 +10,7 @@ const Forums = () => {
     <>
       <Navigation />
       <Header
+        type={"forum"}
         title={"Welcome To Forum"}
         text={"Internet Forum for Everyone!!!"}
       />
