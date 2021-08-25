@@ -3,7 +3,8 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 // import ProfileInfo from "../ProfileInfo/ProfileInfo";
 // import TopicsStarted from "../TopicsStarted/TopicsStarted";
-import RepliesCreated from "../RepliesCreated/RepliesCreated";
+// import RepliesCreated from "../RepliesCreated/RepliesCreated";
+import EditProfile from "../EditProfile/EditProfile";
 
 import {
   Wrapper,
@@ -50,7 +51,8 @@ const Profile = () => {
         <Content>
           {/* <ProfileInfo /> */}
           {/* <TopicsStarted /> */}
-          <RepliesCreated />
+          {/* <RepliesCreated /> */}
+          <EditProfile />
         </Content>
       </Wrapper>
       <Footer />
