@@ -1,7 +1,8 @@
 // import Home from "./components/Home/Home";
 // import Forums from "./components/Forums/Forums";
 // import Forum from "./components/Forum/Forum";
-import Topic from "./components/Topic/Topic";
+// import Topic from "./components/Topic/Topic";
+import Profile from "./components/Profile/Profile";
 
 import { GlobalStyles } from "./GlobalStyles";
 
@@ -12,7 +13,8 @@ const App = () => {
       {/* <Home /> */}
       {/* <Forums /> */}
       {/* <Forum /> */}
-      <Topic />
+      {/* <Topic /> */}
+      <Profile />
     </>
   );
 };

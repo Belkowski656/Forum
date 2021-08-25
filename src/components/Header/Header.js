@@ -23,7 +23,7 @@ const Header = ({ title, text, type }) => {
           <Box>
             <Title>{title}</Title>
             <Text>{text}</Text>
-            {type === "forum" || type === "topic" ? (
+            {type === "forum" || type === "topic" || type === "user" ? (
               <Empty />
             ) : (
               <Search>
