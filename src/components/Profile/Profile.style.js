@@ -3,10 +3,22 @@ import { blue, fontStandard, gray } from "../../resources/variables/variables";
 
 export const Wrapper = styled.div`
   padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  @media (min-width: 992px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 `;
 
 export const SideNav = styled.nav`
   border: 1px solid rgba(0, 0, 0, 0.3);
+
+  @media (min-width: 992px) {
+    width: 25%;
+  }
 `;
 
 export const Img = styled.div`
@@ -31,10 +43,18 @@ export const Link = styled.a`
   border-top: 1px solid rgba(0, 0, 0, 0.3);
   font-size: ${fontStandard};
   transition: 0.2s;
+  cursor: pointer;
 
   :hover {
     color: ${blue};
   }
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  margin-top: 50px;
+
+  @media (min-width: 992px) {
+    margin: 0;
+    width: 70%;
+  }
+`;
