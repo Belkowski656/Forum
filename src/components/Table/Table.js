@@ -14,10 +14,12 @@ import {
 const Table = ({ type }) => {
   return (
     <>
-      <Wrapper>
+      <Wrapper type={type}>
         <tbody>
           <FirstRow>
-            <Th>{type === "topic" ? "Topic" : "Category"}</Th>
+            <Th>
+              {type === "topic" || type === "user" ? "Topic" : "Category"}
+            </Th>
             <ThIcon>
               <i className="fas fa-comment"></i>
             </ThIcon>

@@ -1,7 +1,8 @@
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import ProfileInfo from "../ProfileInfo/ProfileInfo";
+// import ProfileInfo from "../ProfileInfo/ProfileInfo";
+import TopicsStarted from "../TopicsStarted/TopicsStarted";
 
 import {
   Wrapper,
@@ -46,7 +47,8 @@ const Profile = () => {
           </Menu>
         </SideNav>
         <Content>
-          <ProfileInfo />
+          {/* <ProfileInfo /> */}
+          <TopicsStarted />
         </Content>
       </Wrapper>
       <Footer />

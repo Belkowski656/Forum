@@ -11,6 +11,7 @@ export const Wrapper = styled.table`
   margin: 80px auto 0;
   border: 1px solid gray;
   border-collapse: collapse;
+  margin-top: ${({ type }) => (type === "user" ? "0" : "80px")};
 `;
 
 export const FirstRow = styled.tr`
