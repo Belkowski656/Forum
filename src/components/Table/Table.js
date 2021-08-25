@@ -11,13 +11,13 @@ import {
   TdTime,
 } from "./Table.style";
 
-const Table = () => {
+const Table = ({ type }) => {
   return (
     <>
       <Wrapper>
         <tbody>
           <FirstRow>
-            <Th>Category</Th>
+            <Th>{type === "topic" ? "Topic" : "Category"}</Th>
             <ThIcon>
               <i className="fas fa-comment"></i>
             </ThIcon>
