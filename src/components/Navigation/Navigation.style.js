@@ -77,12 +77,12 @@ export const Link = styled.a`
   cursor: pointer;
   transition: 0.2s;
 
-  :hover {
-    color: ${blue};
-  }
-
   @media (min-width: 992px) {
     margin: 0 20px;
+
+    :hover {
+      color: ${blue};
+    }
   }
 `;
 
@@ -92,12 +92,12 @@ export const Login = styled.a`
   cursor: pointer;
   transition: 0.2s;
 
-  :hover {
-    background-color: #17698f;
-  }
-
   @media (min-width: 992px) {
     background-color: ${blue};
     padding: 10px 20px;
+
+    :hover {
+      background-color: #17698f;
+    }
   }
 `;

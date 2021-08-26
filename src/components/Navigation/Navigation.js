@@ -32,15 +32,6 @@ const Navigation = () => {
             <MenuElement>
               <Link>Forum</Link>
             </MenuElement>
-            <MenuElement>
-              <Link>Users</Link>
-            </MenuElement>
-            <MenuElement>
-              <Link>FAQ</Link>
-            </MenuElement>
-            <MenuElement>
-              <Link>Contact</Link>
-            </MenuElement>
           </Menu>
           <Login>Login</Login>
         </Content>
