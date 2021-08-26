@@ -7,7 +7,6 @@ import {
   SmallLabel,
   Text,
   Radio,
-  Avatar,
   Change,
 } from "./Informations.style";
 
@@ -47,21 +46,25 @@ const Informations = () => {
           <Form key={i}>
             {input.type === "radio" ? (
               <>
-                <Text>{input.name}</Text>
-                <Radio
-                  type={input.type}
-                  id="male"
-                  defaultValue={input.value}
-                  name="gender"
-                />{" "}
-                <SmallLabel htmlFor="male">Male</SmallLabel>
-                <Radio
-                  type={input.type}
-                  id="female"
-                  defaultValue={input.value}
-                  name="gender"
-                />
-                <SmallLabel htmlFor="female"> Female</SmallLabel>
+                <Text>{input.name}</Text>{" "}
+                <SmallLabel htmlFor="male">
+                  <Radio
+                    type={input.type}
+                    id="male"
+                    defaultValue={input.value}
+                    name="gender"
+                  />{" "}
+                  Male
+                </SmallLabel>{" "}
+                <SmallLabel htmlFor="female">
+                  <Radio
+                    type={input.type}
+                    id="female"
+                    defaultValue={input.value}
+                    name="gender"
+                  />
+                  Female
+                </SmallLabel>
               </>
             ) : (
               <>
@@ -76,10 +79,11 @@ const Informations = () => {
             <Save>Save</Save>
           </Form>
         ))}
-        <Avatar>
+        <Form>
           <Text>Avatar</Text>
           <Change type="file" />
-        </Avatar>
+          <Save>Save</Save>
+        </Form>
       </Wrapper>
     </>
   );

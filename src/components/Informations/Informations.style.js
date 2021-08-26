@@ -6,10 +6,22 @@ import {
   gray,
 } from "../../resources/variables/variables";
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  @media (min-width: 576px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+`;
 
 export const Form = styled.form`
   padding: 20px 30px;
+  @media (min-width: 576px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 50%;
+  }
 `;
 
 export const Label = styled.label`
@@ -68,8 +80,21 @@ export const Save = styled.button`
   }
 `;
 
-export const Avatar = styled.form`
-  padding: 20px 30px;
-`;
+export const Change = styled.input`
+  visibility: hidden;
 
-export const Change = styled.input``;
+  ::before {
+    content: "Upload File";
+    display: inline-block;
+    visibility: visible;
+    background-color: ${gray};
+    padding: 10px 20px;
+    font-size: ${fontSmall};
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+  :hover {
+    background-color: black;
+  }
+`;

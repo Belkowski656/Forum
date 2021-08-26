@@ -15,6 +15,8 @@ export const Link = styled.a`
   text-align: center;
   font-weight: bold;
   color: ${gray};
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 
   :nth-child(1) {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
