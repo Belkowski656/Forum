@@ -94,7 +94,4 @@ export const Change = styled.input`
     color: white;
     cursor: pointer;
   }
-  :hover {
-    background-color: black;
-  }
 `;
