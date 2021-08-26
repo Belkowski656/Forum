@@ -1,10 +1,8 @@
+import { Outlet } from "react-router-dom";
+
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-// import ProfileInfo from "../ProfileInfo/ProfileInfo";
-// import TopicsStarted from "../TopicsStarted/TopicsStarted";
-// import RepliesCreated from "../RepliesCreated/RepliesCreated";
-import EditProfile from "../EditProfile/EditProfile";
 
 import {
   Wrapper,
@@ -49,10 +47,7 @@ const Profile = () => {
           </Menu>
         </SideNav>
         <Content>
-          {/* <ProfileInfo /> */}
-          {/* <TopicsStarted /> */}
-          {/* <RepliesCreated /> */}
-          <EditProfile />
+          <Outlet />
         </Content>
       </Wrapper>
       <Footer />

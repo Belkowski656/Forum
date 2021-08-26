@@ -1,5 +1,4 @@
-// import Informations from "../Informations/Informations";
-import Seciurity from "../Seciurity/Seciurity";
+import { Outlet } from "react-router-dom";
 
 import { Wrapper, Menu, Link } from "./EditProfile.style";
 
@@ -11,8 +10,7 @@ const EditProfile = () => {
           <Link>Informations</Link>
           <Link>Seciurity</Link>
         </Menu>
-        {/* <Informations /> */}
-        <Seciurity />
+        <Outlet />
       </Wrapper>
     </>
   );
