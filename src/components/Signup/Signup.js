@@ -49,17 +49,17 @@ const Signup = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const result = await fetch("/test", {
+    const { email } = data;
+
+    const verifyCode = await fetch("/verify-code", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        test: "test",
+        email,
       }),
     }).then((res) => res.json());
 
-    console.log(result);
+    console.log(verifyCode);
   };
 
   return (
