@@ -48,14 +48,23 @@ const Signup = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const result = await fetch("/test", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        test: "test",
+      }),
+    }).then((res) => res.json());
+
+    console.log(result);
   };
 
   return (
     <>
       <Wrapper>
-        {console.log(errors)}
         <Image img={img} />
         <Content>
           <Logo to="/">Forum</Logo>
