@@ -46,7 +46,7 @@ app.post("/verify-code", (req, res) => {
     }
   });
 
-  res.json(verifyCode);
+  res.json({ status: "ok", verifyCode });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
+import Popup from "../Popup/Popup";
 
 import {
   Wrapper,
@@ -19,6 +22,8 @@ import {
 import img from "../../resources/images/login.jpg";
 
 const Signup = () => {
+  const [popup, setPopup] = useState(true);
+
   let schema = yup.object().shape({
     username: yup
       .string("Invalid Format")
@@ -59,12 +64,14 @@ const Signup = () => {
       }),
     }).then((res) => res.json());
 
-    console.log(verifyCode);
+    if (verifyCode.status === "ok") {
+    }
   };
 
   return (
     <>
       <Wrapper>
+        {popup ? <Popup /> : null}
         <Image img={img} />
         <Content>
           <Logo to="/">Forum</Logo>
