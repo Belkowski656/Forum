@@ -112,3 +112,9 @@ export const StyledLink = styled(Link)`
     text-align: right;
   }
 `;
+
+export const Error = styled.p`
+  font-size: ${fontSmall};
+  color: red;
+  padding-bottom: 20px;
+`;
