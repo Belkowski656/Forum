@@ -10,7 +10,7 @@ import {
   Remember,
   Checkbox,
   LinksWrapper,
-  Link,
+  StyledLink,
   Image,
 } from "./Login.style";
 
@@ -22,7 +22,7 @@ const Login = () => {
       <Wrapper>
         <Image img={img} />
         <Content>
-          <Logo href="#">Forum</Logo>
+          <Logo to="/">Forum</Logo>
           <Form>
             <Label htmlFor="login">Username or Email Address</Label>
             <Input id="login" type="text" />
@@ -37,11 +37,11 @@ const Login = () => {
             </Box>
           </Form>
           <LinksWrapper>
-            <Link href="#">Register</Link>
-            <Link href="#">Lost your password?</Link>
-            <Link href="#">
+            <StyledLink to="/signup">Register</StyledLink>
+            <StyledLink to="#">Lost your password?</StyledLink>
+            <StyledLink to="/">
               <i className="fas fa-arrow-left"></i>Back to forum
-            </Link>{" "}
+            </StyledLink>{" "}
           </LinksWrapper>
         </Content>
       </Wrapper>

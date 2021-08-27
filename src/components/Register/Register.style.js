@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import {
   blue,
   fontBig,
@@ -37,7 +39,7 @@ export const Text = styled.p`
   margin-bottom: 30px;
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   padding: 10px 20px;
   background-color: ${gray};
   border: none;
@@ -46,6 +48,7 @@ export const Button = styled.button`
   font-size: ${fontSmall};
   font-weight: bold;
   text-transform: uppercase;
+  text-decoration: none;
 `;
 
 export const Image = styled.div`

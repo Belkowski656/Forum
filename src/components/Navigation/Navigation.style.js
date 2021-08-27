@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import { blue, gray, fontStandard } from "../../resources/variables/variables";
 
@@ -69,13 +70,15 @@ export const Menu = styled.ul`
 
 export const MenuElement = styled.li``;
 
-export const Link = styled.a`
+export const StyledLink = styled(Link)`
   display: block;
   padding: 10px 0;
   font-size: ${fontStandard};
   text-transform: uppercase;
   cursor: pointer;
   transition: 0.2s;
+  text-decoration: none;
+  color: white;
 
   @media (min-width: 992px) {
     margin: 0 20px;
@@ -86,11 +89,13 @@ export const Link = styled.a`
   }
 `;
 
-export const Login = styled.a`
+export const Login = styled(Link)`
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+  text-decoration: none;
+  color: white;
 
   @media (min-width: 992px) {
     background-color: ${blue};

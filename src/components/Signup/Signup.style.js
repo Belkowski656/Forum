@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import {
   blue,
   fontHuge,
@@ -36,7 +38,7 @@ export const Content = styled.div`
   }
 `;
 
-export const Logo = styled.a`
+export const Logo = styled(Link)`
   display: block;
   text-align: center;
   font-size: ${fontHuge};
@@ -93,7 +95,7 @@ export const LinksWrapper = styled.div`
   max-width: 400px;
 `;
 
-export const Link = styled.a`
+export const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
   transition: 0.2s;

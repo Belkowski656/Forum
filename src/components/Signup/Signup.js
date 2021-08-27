@@ -7,7 +7,7 @@ import {
   Input,
   Button,
   LinksWrapper,
-  Link,
+  StyledLink,
   Image,
 } from "./Signup.style";
 
@@ -19,7 +19,7 @@ const Signup = () => {
       <Wrapper>
         <Image img={img} />
         <Content>
-          <Logo href="#">Forum</Logo>
+          <Logo to="/">Forum</Logo>
           <Form>
             <Label htmlFor="username">Username</Label>
             <Input id="username" type="text" />
@@ -30,10 +30,10 @@ const Signup = () => {
             <Button>Register</Button>
           </Form>
           <LinksWrapper>
-            <Link href="#">
+            <StyledLink to="/">
               <i className="fas fa-arrow-left"></i>Back to forum
-            </Link>
-            <Link href="#">Login</Link>
+            </StyledLink>
+            <StyledLink to="/login">Login</StyledLink>
           </LinksWrapper>
         </Content>
       </Wrapper>

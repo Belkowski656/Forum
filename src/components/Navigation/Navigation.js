@@ -6,7 +6,7 @@ import {
   Hamburger,
   Menu,
   MenuElement,
-  Link,
+  StyledLink,
   Login,
   Logo,
 } from "./Navigation.style";
@@ -18,7 +18,7 @@ const Navigation = () => {
     <>
       <Wrapper>
         <Content>
-          <Logo>Forum</Logo>
+          <Logo to="/">Forum</Logo>
           <Hamburger
             onClick={() => setHamburger((prev) => !prev)}
             active={hamburger}
@@ -27,13 +27,13 @@ const Navigation = () => {
           </Hamburger>
           <Menu active={hamburger}>
             <MenuElement>
-              <Link>Home</Link>
+              <StyledLink to="/">Home</StyledLink>
             </MenuElement>
             <MenuElement>
-              <Link>Forum</Link>
+              <StyledLink to="/forums">Forum</StyledLink>
             </MenuElement>
           </Menu>
-          <Login>Login</Login>
+          <Login to="/login">Login</Login>
         </Content>
       </Wrapper>
     </>

@@ -17,7 +17,7 @@ const Header = ({ title, text, type }) => {
     <>
       <Wrapper>
         <LogoWrapper>
-          <Logo>Forum</Logo>
+          <Logo to="/">Forum</Logo>
         </LogoWrapper>
         <Content>
           <Box>

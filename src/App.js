@@ -10,6 +10,8 @@ import RepliesCreated from "./components/RepliesCreated/RepliesCreated";
 import EditProfile from "./components/EditProfile/EditProfile";
 import Informations from "./components/Informations/Informations";
 import Seciurity from "./components/Seciurity/Seciurity";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 
 import { GlobalStyles } from "./GlobalStyles";
 
@@ -31,6 +33,8 @@ const App = () => {
               <Route path="seciurity" element={<Seciurity />} />
             </Route>
           </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </Router>
     </>

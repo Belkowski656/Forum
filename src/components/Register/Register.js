@@ -14,7 +14,7 @@ const Register = () => {
             iste aliquam, at minima esse saepe perferendis in quisquam repellat.
             Voluptatem veritatis quae nulla!
           </Text>
-          <Button>Register Now</Button>
+          <Button to="/signup">Register Now</Button>
         </Content>
         <Image img={img} />
       </Wrapper>

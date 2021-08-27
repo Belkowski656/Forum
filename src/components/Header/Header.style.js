@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import {
   gray,
   fontHuge,
@@ -30,9 +32,11 @@ export const LogoWrapper = styled.div`
   }
 `;
 
-export const Logo = styled.h1`
+export const Logo = styled(Link)`
   text-transform: uppercase;
   font-size: 44px;
+  text-decoration: none;
+  color: white;
 `;
 
 export const Content = styled.div`
