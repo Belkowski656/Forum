@@ -17,6 +17,10 @@ import {
 import img from "../../resources/images/login.jpg";
 
 const Profile = () => {
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+  };
+
   return (
     <>
       <Navigation />
@@ -42,7 +46,9 @@ const Profile = () => {
               <StyledLink to="edit">Edit Profile</StyledLink>
             </MenuElement>
             <MenuElement>
-              <StyledLink to="/login">Logout</StyledLink>
+              <StyledLink onClick={handleLogout} to="/login">
+                Logout
+              </StyledLink>
             </MenuElement>
           </Menu>
         </SideNav>
