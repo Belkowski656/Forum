@@ -22,7 +22,13 @@ import {
 import img from "../../resources/images/login.jpg";
 
 const Signup = () => {
-  const [popup, setPopup] = useState(true);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [popup, setPopup] = useState(false);
+  const [verifyCode, setVerifyCode] = useState("");
+  const [serverError, setServerError] = useState("");
 
   let schema = yup.object().shape({
     username: yup
@@ -54,24 +60,44 @@ const Signup = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    const { email } = data;
+    const { username, email, password } = data;
 
     const verifyCode = await fetch("/verify-code", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        username,
         email,
+        password,
       }),
     }).then((res) => res.json());
 
+    if (verifyCode.status === "error") {
+      setServerError(verifyCode.error);
+    }
+
     if (verifyCode.status === "ok") {
+      setServerError("");
+      setEmail(email);
+      setUsername(username);
+      setPassword(password);
+      setPopup(true);
+      setVerifyCode(verifyCode.verifyCode);
     }
   };
 
   return (
     <>
       <Wrapper>
-        {popup ? <Popup /> : null}
+        {popup ? (
+          <Popup
+            email={email}
+            username={username}
+            password={password}
+            setPopup={setPopup}
+            verifyCode={verifyCode}
+          />
+        ) : null}
         <Image img={img} />
         <Content>
           <Logo to="/">Forum</Logo>
@@ -85,6 +111,7 @@ const Signup = () => {
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" {...register("password")} />
             {errors.password ? <Error>{errors.password.message}</Error> : null}
+            {serverError ? <Error>{serverError}</Error> : null}
             <Button>Register</Button>
           </Form>
           <LinksWrapper>

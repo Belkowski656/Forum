@@ -1,19 +1,63 @@
-const password = require("./hiddenData").password;
+const emailPassword = require("./hiddenData").password;
 
 const express = require("express");
 const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
+
+const User = require("./models/user");
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello");
+mongoose.connect("mongodb://localhost:27017/forum", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-app.post("/verify-code", (req, res) => {
-  const { email } = req.body;
+app.post("/register", async (req, res) => {
+  const { username, email, password: plainTextPassword } = req.body;
+
+  const password = await bcrypt.hash(plainTextPassword, 10);
+
+  try {
+    await User.create({
+      username,
+      email,
+      password,
+    });
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.json({
+        status: "error",
+        error: `${JSON.stringify(error.keyValue)} already in use`,
+      });
+    }
+    throw error;
+  }
+  res.json({ status: "ok" });
+});
+
+app.post("/verify-code", async (req, res) => {
+  const { username, email } = req.body;
+
+  const user = await User.find({ $or: [{ username }, { email }] });
+
+  if (user.length) {
+    if (user[0].username === username && user[0].email === email) {
+      return res.json({
+        status: "error",
+        error: "Username and Email already in use.",
+      });
+    } else if (user[0].username === username) {
+      return res.json({ status: "error", error: "Username already in use." });
+    } else {
+      return res.json({ status: "error", error: "Email already in use." });
+    }
+  }
+
   let verifyCode = "";
 
   for (let i = 0; i < 6; i++) {
@@ -27,15 +71,15 @@ app.post("/verify-code", (req, res) => {
     secure: false,
     auth: {
       user: "belkowski656@gmail.com",
-      pass: password,
+      pass: emailPassword,
     },
   });
 
   const mailOptions = {
     from: "belkowski656@gmail.com",
     to: email,
-    subject: "Verify Code to Forum",
-    text: `Your verify code is ${verifyCode}`,
+    subject: "Confirm registrations to Forum",
+    text: `<h2>Your verification code is ${verifyCode}</h2>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
