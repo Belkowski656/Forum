@@ -12,22 +12,65 @@ import {
   LinksWrapper,
   StyledLink,
   Image,
+  Error,
 } from "./Login.style";
 
 import img from "../../resources/images/login.jpg";
+import { useState } from "react";
 
 const Login = () => {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState([]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (login === "" || password === "") {
+      return setError("Plese enter your username or email and password.");
+    }
+
+    const result = await fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        login,
+        password,
+      }),
+    }).then((res) => res.json());
+
+    if (result.status === "error") {
+      setError(result.error);
+    }
+
+    if (result.status === "ok") {
+      setError("");
+      sessionStorage.setItem("token", result.token);
+      document.location.href = "/forums";
+    }
+  };
+
   return (
     <>
       <Wrapper>
         <Image img={img} />
         <Content>
           <Logo to="/">Forum</Logo>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Label htmlFor="login">Username or Email Address</Label>
-            <Input id="login" type="text" />
+            <Input
+              id="login"
+              type="text"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+            />
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" />
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <Box>
               <Button>Login</Button>
               <Remember>
@@ -35,6 +78,7 @@ const Login = () => {
                 <Label htmlFor="checkbox">Stay Login</Label>
               </Remember>
             </Box>
+            {error ? <Error>{error}</Error> : null}
           </Form>
           <LinksWrapper>
             <StyledLink to="/signup">Register</StyledLink>

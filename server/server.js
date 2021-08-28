@@ -1,9 +1,11 @@
 const emailPassword = require("./hiddenData").password;
+const JWT_SECRET = require("./hiddenData").JWT_SECRET;
 
 const express = require("express");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 const User = require("./models/user");
 
@@ -15,6 +17,40 @@ app.use(express.json());
 mongoose.connect("mongodb://localhost:27017/forum", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+app.post("/login", async (req, res) => {
+  const { login, password } = req.body;
+
+  try {
+    const user = await User.findOne({
+      $or: [{ username: login }, { email: login }],
+    });
+
+    if (!user) {
+      return res.json({
+        status: "error",
+        error: "Invalid username or password",
+      });
+    }
+
+    if (await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign(
+        { id: user._id, username: user.username },
+        JWT_SECRET
+      );
+
+      return res.json({ status: "ok", token });
+    }
+
+    res.json({ status: "error", error: "Invalid username or password." });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      status: "error",
+      error: "Something went wrong. Try again later.",
+    });
+  }
 });
 
 app.post("/register", async (req, res) => {
