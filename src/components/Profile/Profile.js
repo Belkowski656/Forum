@@ -10,7 +10,7 @@ import {
   Img,
   Menu,
   MenuElement,
-  Link,
+  StyledLink,
   Content,
 } from "./Profile.style";
 
@@ -30,19 +30,19 @@ const Profile = () => {
           <Img img={img} />
           <Menu>
             <MenuElement>
-              <Link>Profile</Link>
+              <StyledLink to="/profile">Profile</StyledLink>
             </MenuElement>
             <MenuElement>
-              <Link>Topics Started</Link>
+              <StyledLink to="topics">Topics Started</StyledLink>
             </MenuElement>
             <MenuElement>
-              <Link>Replies Created</Link>
+              <StyledLink to="replies">Replies Created</StyledLink>
             </MenuElement>
             <MenuElement>
-              <Link>Edit Profile</Link>
+              <StyledLink to="edit">Edit Profile</StyledLink>
             </MenuElement>
             <MenuElement>
-              <Link>Logout</Link>
+              <StyledLink to="/login">Logout</StyledLink>
             </MenuElement>
           </Menu>
         </SideNav>

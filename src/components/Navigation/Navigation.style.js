@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { blue, gray, fontStandard } from "../../resources/variables/variables";
+import {
+  blue,
+  gray,
+  fontStandard,
+  fontMedium,
+} from "../../resources/variables/variables";
 
 export const Wrapper = styled.div`
   background-color: ${blue};
@@ -105,4 +110,35 @@ export const Login = styled(Link)`
       background-color: #17698f;
     }
   }
+`;
+
+export const User = styled.button`
+  position: relative;
+  background-color: ${blue};
+  border: none;
+  color: white;
+  font-size: ${fontMedium};
+  cursor: pointer;
+  transition: 0.2s;
+`;
+
+export const Options = styled.ul`
+  position: absolute;
+  right: -20px;
+  top: calc(100% + 25px);
+  background-color: ${blue};
+  list-style: none;
+  padding: 10px 0;
+  opacity: ${({ active }) => (active ? "1" : "0")};
+  display: ${({ active }) => (active ? "block" : "none")};
+`;
+
+export const Option = styled.li``;
+
+export const StyledOption = styled(Link)`
+  display: block;
+  padding: 5px 20px;
+  text-align: left;
+  text-decoration: none;
+  color: white;
 `;

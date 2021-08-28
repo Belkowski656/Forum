@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { blue, gray } from "../../resources/variables/variables";
 
 export const Wrapper = styled.div`
@@ -9,7 +10,7 @@ export const Menu = styled.nav`
   display: flex;
 `;
 
-export const Link = styled.a`
+export const StyledLink = styled(Link)`
   width: 50%;
   padding: 10px 15px;
   text-align: center;

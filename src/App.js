@@ -29,7 +29,7 @@ const App = () => {
             <Route path="topics" element={<TopicsStarted />} />
             <Route path="replies" element={<RepliesCreated />} />
             <Route path="edit" element={<EditProfile />}>
-              <Route path="informations" element={<Informations />} />
+              <Route path="/" element={<Informations />} />
               <Route path="seciurity" element={<Seciurity />} />
             </Route>
           </Route>

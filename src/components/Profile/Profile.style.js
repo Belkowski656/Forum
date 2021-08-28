@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { blue, fontStandard, gray } from "../../resources/variables/variables";
 
 export const Wrapper = styled.div`
@@ -37,13 +38,15 @@ export const Menu = styled.ul`
 
 export const MenuElement = styled.li``;
 
-export const Link = styled.a`
+export const StyledLink = styled(Link)`
   display: block;
   padding: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.3);
   font-size: ${fontStandard};
   transition: 0.2s;
   cursor: pointer;
+  color: ${gray};
+  text-decoration: none;
 
   :hover {
     color: ${blue};

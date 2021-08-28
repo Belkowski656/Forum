@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
 
-import { Wrapper, Menu, Link } from "./EditProfile.style";
+import { Wrapper, Menu, StyledLink } from "./EditProfile.style";
 
 const EditProfile = () => {
   return (
     <>
       <Wrapper>
         <Menu>
-          <Link>Informations</Link>
-          <Link>Seciurity</Link>
+          <StyledLink to="/profile/edit">Informations</StyledLink>
+          <StyledLink to="seciurity">Seciurity</StyledLink>
         </Menu>
         <Outlet />
       </Wrapper>
