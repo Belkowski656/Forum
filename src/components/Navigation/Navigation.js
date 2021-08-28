@@ -23,6 +23,10 @@ const Navigation = () => {
     setMenuActive((prev) => !prev);
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+  };
+
   return (
     <>
       <Wrapper>
@@ -50,7 +54,9 @@ const Navigation = () => {
                   <StyledOption to="/profile">Account</StyledOption>
                 </Option>
                 <Option>
-                  <StyledOption to="/login">Logout</StyledOption>
+                  <StyledOption onClick={handleLogout} to="/login">
+                    Logout
+                  </StyledOption>
                 </Option>
               </Options>
             </User>

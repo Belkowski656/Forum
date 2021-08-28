@@ -18,6 +18,7 @@ export const StyledLink = styled(Link)`
   color: ${gray};
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  text-decoration: none;
 
   :nth-child(1) {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
