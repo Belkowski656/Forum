@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Wrapper,
   Content,
@@ -16,7 +18,6 @@ import {
 } from "./Login.style";
 
 import img from "../../resources/images/login.jpg";
-import { useState } from "react";
 
 const Login = () => {
   const [login, setLogin] = useState("");
@@ -49,6 +50,10 @@ const Login = () => {
       document.location.href = "/forums";
     }
   };
+
+  useEffect(() => {
+    if (sessionStorage.getItem("token")) document.location.href = "/";
+  });
 
   return (
     <>
