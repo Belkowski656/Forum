@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
@@ -14,12 +15,28 @@ import {
   Content,
 } from "./Profile.style";
 
-import img from "../../resources/images/login.jpg";
-
 const Profile = () => {
+  const [image, setImage] = useState("");
+
   const handleLogout = () => {
     sessionStorage.removeItem("token");
   };
+
+  const fetchUserData = async () => {
+    const result = await fetch("/fetch-user-data", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: sessionStorage.getItem("token"),
+      }),
+    }).then((res) => res.json());
+
+    if (result.status === "ok") {
+      setImage(result.data.avatar);
+    }
+  };
+
+  useEffect(fetchUserData);
 
   return (
     <>
@@ -31,7 +48,7 @@ const Profile = () => {
       />
       <Wrapper>
         <SideNav>
-          <Img img={img} />
+          <Img img={image} />
           <Menu>
             <MenuElement>
               <StyledLink to="/profile">Profile</StyledLink>

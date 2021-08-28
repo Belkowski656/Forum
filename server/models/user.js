@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       require: true,
       default:
-        "https://ams02pap001files.storage.live.com/y4mQki-m9Ujme2fDdqOmgA3kAZwhPWg0CMiyguAQnKuY8YF_wFNoyOKL4rDveAhSrdZJ4PqeKjWEtkYPf0L_n3dW5H7ra5aip3WHkhWLU_hALTWPO3S0lb8zXKnhqHXUjTTbrS8ZcJk5uXmPw_mxKLhAZe6xXVXNqXj1Vo9tYjx4ZF6nlaI0X8P7wMu9mAntSBK?width=401&height=721&cropmode=none",
+        "https://ams02pap001files.storage.live.com/y4mRdpu_Ugh1hSOtdlEe3uzsOgeIbpaQLdbpEMpOym3F7ec6iNN1Je454zJei9gXrbA-Bh68hw31thcXzd-YV3xALMBYeN72LCrK9-HuFjgC413u_9OziqHtiLmNlclg4lOhGbPnRAeqV6LlZgJHZRcj8evXLjVJ_Xl7EsFjOxdEKBkwyo2v7VdtcJcoj1iYt5J?width=512&height=512&cropmode=none",
     },
   },
   { collection: "users" }

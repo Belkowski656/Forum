@@ -19,6 +19,21 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/fetch-user-data", async (req, res) => {
+  const { token } = req.body;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+
+    const _id = user.id;
+
+    const userData = await User.findOne({ _id }).lean();
+
+    res.json({ status: "ok", data: userData });
+  } catch (error) {
+    res.json({ status: "error", error: error });
+  }
+});
+
 app.post("/login", async (req, res) => {
   const { login, password } = req.body;
 
