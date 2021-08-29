@@ -1,3 +1,6 @@
+import { useContext, useEffect, useState } from "react";
+import DataContext from "../../Context/dataContext";
+
 import {
   Wrapper,
   Stats,
@@ -12,6 +15,18 @@ import {
 } from "./ProfileInfo.style";
 
 const ProfileInfo = () => {
+  const [creationDate, setCreationDate] = useState("");
+
+  const userData = useContext(DataContext);
+
+  useEffect(() => {
+    const date = new Date(userData.dateOfCreation);
+
+    setCreationDate(
+      `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+    );
+  }, [userData]);
+
   return (
     <>
       <Wrapper>
@@ -21,7 +36,7 @@ const ProfileInfo = () => {
               <i className="fas fa-calendar-alt"></i>
             </Icon>
             <StatText>Registered</StatText>
-            <StatValue>30/09/2011</StatValue>
+            <StatValue>{creationDate}</StatValue>
           </StatBox>
           <StatBox>
             <Icon>

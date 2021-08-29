@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { DataProvider } from "../../Context/dataContext";
 
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
@@ -18,7 +19,7 @@ import {
 const Profile = () => {
   const [username, setUsername] = useState("");
   const [image, setImage] = useState("");
-  const [creationDate, setCreationDate] = useState("");
+  const [userData, setuserData] = useState("");
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
@@ -35,16 +36,9 @@ const Profile = () => {
     }).then((res) => res.json());
 
     if (result.status === "ok") {
-      console.log(result.data);
-      const creationDateObj = new Date(result.data.dateOfCreation);
-
-      const day = creationDateObj.getDate();
-      const month = creationDateObj.getMonth() + 1;
-      const year = creationDateObj.getFullYear();
-
       setImage(result.data.avatar);
       setUsername(result.data.username);
-      setCreationDate(`${day}/${month}/${year}`);
+      setuserData(result.data);
     }
   };
 
@@ -78,7 +72,9 @@ const Profile = () => {
           </Menu>
         </SideNav>
         <Content>
-          <Outlet />
+          <DataProvider value={userData}>
+            <Outlet />
+          </DataProvider>
         </Content>
       </Wrapper>
       <Footer />
