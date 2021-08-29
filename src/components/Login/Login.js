@@ -23,6 +23,7 @@ const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState([]);
+  const [stayLoggedIn, setStayLoggedIn] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,9 +47,17 @@ const Login = () => {
 
     if (result.status === "ok") {
       setError("");
+
       sessionStorage.setItem("token", result.token);
+
+      if (stayLoggedIn) localStorage.setItem("token", result.token);
+
       document.location.href = "/forums";
     }
+  };
+
+  const handleChange = (e) => {
+    setStayLoggedIn(e.target.checked);
   };
 
   useEffect(() => {
@@ -79,8 +88,13 @@ const Login = () => {
             <Box>
               <Button>Login</Button>
               <Remember>
-                <Checkbox type="checkbox" id="checkbox" />
-                <Label htmlFor="checkbox">Stay Login</Label>
+                <Checkbox
+                  type="checkbox"
+                  id="checkbox"
+                  checked={stayLoggedIn}
+                  onChange={handleChange}
+                />
+                <Label htmlFor="checkbox">Stay Logged In</Label>
               </Remember>
             </Box>
             {error ? <Error>{error}</Error> : null}
@@ -90,7 +104,7 @@ const Login = () => {
             <StyledLink to="#">Lost your password?</StyledLink>
             <StyledLink to="/">
               <i className="fas fa-arrow-left"></i>Back to forum
-            </StyledLink>{" "}
+            </StyledLink>
           </LinksWrapper>
         </Content>
       </Wrapper>

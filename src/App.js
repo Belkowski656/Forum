@@ -14,8 +14,14 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 
 import { GlobalStyles } from "./GlobalStyles";
+import { useEffect } from "react";
 
 const App = () => {
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      sessionStorage.setItem("token", localStorage.getItem("token"));
+    }
+  });
   return (
     <>
       <Router>
