@@ -25,6 +25,7 @@ const Navigation = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
   };
 
   return (

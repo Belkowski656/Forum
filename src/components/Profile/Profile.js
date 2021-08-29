@@ -20,6 +20,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
   };
 
   const fetchUserData = async () => {
