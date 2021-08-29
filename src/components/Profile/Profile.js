@@ -16,7 +16,9 @@ import {
 } from "./Profile.style";
 
 const Profile = () => {
+  const [username, setUsername] = useState("");
   const [image, setImage] = useState("");
+  const [creationDate, setCreationDate] = useState("");
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
@@ -33,7 +35,16 @@ const Profile = () => {
     }).then((res) => res.json());
 
     if (result.status === "ok") {
+      console.log(result.data);
+      const creationDateObj = new Date(result.data.dateOfCreation);
+
+      const day = creationDateObj.getDate();
+      const month = creationDateObj.getMonth() + 1;
+      const year = creationDateObj.getFullYear();
+
       setImage(result.data.avatar);
+      setUsername(result.data.username);
+      setCreationDate(`${day}/${month}/${year}`);
     }
   };
 
@@ -42,11 +53,7 @@ const Profile = () => {
   return (
     <>
       <Navigation />
-      <Header
-        type="user"
-        title={"Example username"}
-        text={"User description"}
-      />
+      <Header type="user" title={username} text={""} />
       <Wrapper>
         <SideNav>
           <Img img={image} />
