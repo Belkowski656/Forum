@@ -1,11 +1,16 @@
+import { useContext } from "react";
+
 import { Wrapper, Content, Title, Text, Button, Image } from "./Register.style";
 
 import img from "../../resources/images/signup.png";
+import LoggedContext from "../../Context/loggedContext";
 
 const Register = () => {
+  const logged = useContext(LoggedContext).logged;
+
   return (
     <>
-      {sessionStorage.getItem("token") ? null : (
+      {logged ? null : (
         <Wrapper>
           <Content>
             <Title>Join Our Forum!</Title>

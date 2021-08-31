@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { LoggedProvider } from "./Context/loggedContext";
 
 import Home from "./components/Home/Home";
 import Forums from "./components/Forums/Forums";
@@ -14,34 +15,42 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 
 import { GlobalStyles } from "./GlobalStyles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
+  const [logged, setLogged] = useState(false);
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       sessionStorage.setItem("token", localStorage.getItem("token"));
+
+      if (sessionStorage.getItem("token")) {
+        setLogged(true);
+      }
     }
-  });
+  }, []);
   return (
     <>
       <Router>
         <GlobalStyles />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/forums" element={<Forums />} />
-          <Route path="/topic" element={<Topic />} />
-          <Route path="/profile" element={<Profile />}>
-            <Route path="/" element={<ProfileInfo />} />
-            <Route path="topics" element={<TopicsStarted />} />
-            <Route path="replies" element={<RepliesCreated />} />
-            <Route path="edit" element={<EditProfile />}>
-              <Route path="/" element={<Informations />} />
-              <Route path="seciurity" element={<Seciurity />} />
+        <LoggedProvider value={{ logged, setLogged }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/forums" element={<Forums />} />
+            <Route path="/topic" element={<Topic />} />
+            <Route path="/profile" element={<Profile />}>
+              <Route path="/" element={<ProfileInfo />} />
+              <Route path="topics" element={<TopicsStarted />} />
+              <Route path="replies" element={<RepliesCreated />} />
+              <Route path="edit" element={<EditProfile />}>
+                <Route path="/" element={<Informations />} />
+                <Route path="seciurity" element={<Seciurity />} />
+              </Route>
             </Route>
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </LoggedProvider>
       </Router>
     </>
   );

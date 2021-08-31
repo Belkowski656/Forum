@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import LoggedContext from "../../Context/loggedContext";
 
 import {
   Wrapper,
@@ -19,6 +20,9 @@ const Navigation = () => {
   const [hamburger, setHamburger] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
 
+  const logged = useContext(LoggedContext).logged;
+  const setLogged = useContext(LoggedContext).setLogged;
+
   const handleClick = (e) => {
     setMenuActive((prev) => !prev);
   };
@@ -26,6 +30,7 @@ const Navigation = () => {
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     localStorage.removeItem("token");
+    setLogged(false);
   };
 
   return (
@@ -47,7 +52,7 @@ const Navigation = () => {
               <StyledLink to="/forums">Forum</StyledLink>
             </MenuElement>
           </Menu>
-          {sessionStorage.getItem("token") ? (
+          {logged ? (
             <User onClick={handleClick}>
               <i className="fa fa-user"></i>
               <Options active={menuActive}>

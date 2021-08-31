@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+
 import { DataProvider } from "../../Context/dataContext";
+import LoggedContext from "../../Context/loggedContext";
 
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
@@ -21,9 +23,12 @@ const Profile = () => {
   const [image, setImage] = useState("");
   const [userData, setuserData] = useState("");
 
+  const setLogged = useContext(LoggedContext).setLogged;
+
   const handleLogout = () => {
     sessionStorage.removeItem("token");
     localStorage.removeItem("token");
+    setLogged(false);
   };
 
   const fetchUserData = async () => {
