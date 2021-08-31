@@ -42,7 +42,7 @@ const Profile = () => {
     }
   };
 
-  useEffect(fetchUserData);
+  useEffect(() => fetchUserData(), []);
 
   return (
     <>

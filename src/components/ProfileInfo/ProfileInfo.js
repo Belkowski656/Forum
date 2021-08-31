@@ -16,15 +16,41 @@ import {
 
 const ProfileInfo = () => {
   const [creationDate, setCreationDate] = useState("");
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
+  const [location, setLocation] = useState("");
 
   const userData = useContext(DataContext);
 
   useEffect(() => {
     const date = new Date(userData.dateOfCreation);
 
-    setCreationDate(
-      `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
-    );
+    const day =
+      date.getDate() < 10 ? "0" + date.getDate().toString() : date.getDate();
+
+    const month =
+      date.getMonth() + 1 < 10
+        ? "0" + (date.getMonth() + 1).toString()
+        : date.getMonth() + 1;
+
+    const year = date.getFullYear();
+
+    let userAge = "Unknown";
+
+    if (!userData.dateOfBirth === "Unknown") {
+      const now = new Date();
+      const birth = new Date(userData.dateOfBirth);
+
+      userAge = now - birth;
+    } else {
+    }
+
+    setCreationDate(`${day}/${month}/${year}`);
+    setName(userData.name);
+    setAge(userAge);
+    setGender(userData.gender);
+    setLocation(userData.location);
   }, [userData]);
 
   return (
@@ -56,22 +82,22 @@ const ProfileInfo = () => {
         <Informations>
           <Info>
             <Text>
-              Name:<Value>Example Name</Value>
+              Name:<Value>{name}</Value>
             </Text>
           </Info>
           <Info>
             <Text>
-              Age:<Value>19</Value>
+              Age:<Value>{age}</Value>
             </Text>
           </Info>
           <Info>
             <Text>
-              Gender:<Value>Female</Value>
+              Gender:<Value>{gender}</Value>
             </Text>
           </Info>
           <Info>
             <Text>
-              Location:<Value>Poland</Value>
+              Location:<Value>{location}</Value>
             </Text>
           </Info>
         </Informations>
