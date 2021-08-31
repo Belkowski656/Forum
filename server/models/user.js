@@ -15,7 +15,6 @@ const UserSchema = new mongoose.Schema(
     name: { type: String, require: true, default: "Unknown" },
     dateOfBirth: { type: String, require: true, default: "Unknown" },
     gender: { type: String, require: true, default: "Unknown" },
-    location: { type: String, require: true, default: "Unknown" },
   },
   { collection: "users" }
 );
