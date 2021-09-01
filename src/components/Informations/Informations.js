@@ -1,53 +1,130 @@
-import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import DataContext from "../../Context/dataContext";
+import { useEffect, useState } from "react";
 
 import {
   Wrapper,
   Form,
-  InputWrapper,
   Label,
   Input,
   Radio,
   SmallLabel,
-  AvatarForm,
   Avatar,
   Save,
   Error,
+  Box,
+  Text,
+  Change,
+  Cancel,
 } from "./Informations.style";
 
 const Informations = () => {
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [username, setUsername] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [dateOfBirthError, setDateOfBirthError] = useState("");
+  const [gender, setGender] = useState("");
+  const [genderError, setGenderError] = useState("");
+
+  const [showName, setShowName] = useState(false);
+  const [showUsername, setShowUsername] = useState(false);
+  const [showDateOfBirth, setShowDateOfBirth] = useState(false);
+  const [showGender, setShowGender] = useState(false);
+
   const [now, setNow] = useState("");
-  const userData = useContext(DataContext);
 
-  const schema = yup.object().shape({
-    name: yup
-      .string("Invalid Value")
-      .required("Plese enter your name")
-      .min(2, "Name must be at least 2 characters")
-      .max(20, "Name must be at most 20 characters"),
-    username: yup
-      .string("Invalid Value")
-      .required("Plese enter your username")
-      .min(3, "Username must be at least 3 characters")
-      .max(20, "Username must be at most 20 characters"),
-    dateOfBirth: yup
-      .date("Invalid Value")
-      .required("Plese enter your date of birth"),
-    gender: yup.string("Invalid Value").required("Plese choose your gender"),
-  });
+  const handleSubmit = async (e, type) => {
+    e.preventDefault();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+    let value = "";
 
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(errors);
+    if (type === "name") {
+      if (name === "") return setNameError("Please enter your name");
+      else setNameError("");
+
+      if (name.length < 4)
+        return setNameError("Name must be at least 4 characters");
+      else setNameError("");
+
+      if (name.length > 20)
+        return setNameError("Name must be at most 20 characters");
+      else setNameError("");
+
+      value = name;
+    }
+
+    if (type === "username") {
+      if (username === "")
+        return setUsernameError("Please enter your username");
+      else setUsernameError("");
+
+      if (username.length < 4)
+        return setUsernameError("Username must be at least 4 characters");
+      else setUsernameError("");
+
+      if (username.length > 20)
+        return setUsernameError("Username must be at most 20 characters");
+      else setUsernameError("");
+
+      value = username;
+    }
+
+    if (type === "dateOfBirth") {
+      if (dateOfBirth === "")
+        return setDateOfBirthError("Please enter your date Of Birth");
+      else setDateOfBirthError("");
+
+      value = dateOfBirth;
+    }
+
+    if (type === "gender") {
+      if (gender === "") return setGenderError("Plese choose your gender");
+      else setGenderError("");
+
+      value = gender;
+    }
+
+    const result = await fetch("/change", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: sessionStorage.getItem("token"),
+        type,
+        value,
+      }),
+    }).then((res) => res.json());
+
+    if (type === "name") {
+      setShowName(false);
+      setName("");
+      alert("Your name has been changed");
+      window.location.reload(false);
+    }
+
+    if (type === "username") {
+      if (result.status === "duplication") {
+        return setUsernameError(`"${value}" is already in use`);
+      }
+      setShowUsername(false);
+      setUsername("");
+      setUsernameError(``);
+      alert("Your username has been changed");
+      window.location.reload(false);
+    }
+
+    if (type === "dateOfBirth") {
+      setShowDateOfBirth(false);
+      setDateOfBirth("");
+      alert("Your date of birth has been changed");
+      window.location.reload(false);
+    }
+
+    if (type === "gender") {
+      setShowGender(false);
+      setGender("");
+      alert("Your gender has been changed");
+      window.location.reload(false);
+    }
   };
 
   useEffect(() => {
@@ -67,71 +144,139 @@ const Informations = () => {
   return (
     <>
       <Wrapper>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <InputWrapper>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              type="text"
-              defaultValue={userData.name}
-              {...register("name")}
-            />
-            {errors.name ? <Error>{errors.name.message}</Error> : null}
-          </InputWrapper>
-          <InputWrapper>
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              type="text"
-              defaultValue={userData.username}
-              {...register("username")}
-            />
-            {errors.username ? <Error>{errors.username.message}</Error> : null}
-          </InputWrapper>
-          <InputWrapper>
-            <Label htmlFor="birth">Date of Birth</Label>
-            <Input
-              id="birth"
-              type="date"
-              defaultValue={
-                userData.dateOfBirth === "Unknown" ? null : userData.dateOfBirth
-              }
-              {...register("dateOfBirth")}
-              min="1900-01-01"
-              max={now}
-            />
-            {errors.dateOfBirth ? (
-              <Error>{errors.dateOfBirth.message}</Error>
-            ) : null}
-          </InputWrapper>
-          <InputWrapper>
-            <Label>Gender</Label>
-            <Radio
-              id="male"
-              value="male"
-              type="radio"
-              name="gender"
-              {...register("gender")}
-              defaultChecked={userData.gender === "male" ? true : false}
-            />
-            <SmallLabel htmlFor="male">Male</SmallLabel>
-            <Radio
-              id="female"
-              value="female"
-              type="radio"
-              name="gender"
-              {...register("gender")}
-              defaultChecked={userData.gender === "female" ? true : false}
-            />
-            <SmallLabel htmlFor="female">Female</SmallLabel>
-            {errors.gender ? <Error>{errors.gender.message}</Error> : null}
-          </InputWrapper>
-          <Save>Update Profile</Save>
-        </Form>
-        <AvatarForm>
+        <Box>
+          <Text>Name</Text>
+          {showName ? null : (
+            <Change onClick={() => setShowName(true)}>Change</Change>
+          )}
+          {showName ? (
+            <Form onSubmit={(e) => handleSubmit(e, "name")}>
+              <Input
+                type="text"
+                placeholder="Enter your new name"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              {nameError ? <Error>{nameError}</Error> : null}
+              <Save>Save</Save>
+              <Cancel
+                onClick={() => {
+                  setShowName(false);
+                  setNameError("");
+                }}
+              >
+                Cancel
+              </Cancel>
+            </Form>
+          ) : null}
+        </Box>
+        <Box>
+          <Text>Username</Text>
+          {showUsername ? null : (
+            <Change onClick={() => setShowUsername(true)}>Change</Change>
+          )}
+          {showUsername ? (
+            <Form onSubmit={(e) => handleSubmit(e, "username")}>
+              <Input
+                type="text"
+                placeholder="Enter your new username"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+              />
+              {usernameError ? <Error>{usernameError}</Error> : null}
+              <Save>Save</Save>
+              <Cancel
+                onClick={() => {
+                  setShowUsername(false);
+                  setUsernameError("");
+                }}
+              >
+                Cancel
+              </Cancel>
+            </Form>
+          ) : null}
+        </Box>
+        <Box>
+          <Text>Date of Birth</Text>
+          {showDateOfBirth ? null : (
+            <Change onClick={() => setShowDateOfBirth(true)}>Change</Change>
+          )}
+          {showDateOfBirth ? (
+            <Form onSubmit={(e) => handleSubmit(e, "dateOfBirth")}>
+              <Input
+                type="date"
+                value={dateOfBirth}
+                onChange={(e) => {
+                  setDateOfBirth(e.target.value);
+                }}
+                min="1900-01-01"
+                max={now}
+              />
+              {dateOfBirthError ? <Error>{dateOfBirthError}</Error> : null}
+              <Save>Save</Save>
+              <Cancel
+                onClick={() => {
+                  setShowDateOfBirth(false);
+                  setDateOfBirthError("");
+                }}
+              >
+                Cancel
+              </Cancel>
+            </Form>
+          ) : null}
+        </Box>
+        <Box>
+          <Text>Gender</Text>
+          {showGender ? null : (
+            <Change onClick={() => setShowGender(true)}>Change</Change>
+          )}
+          {showGender ? (
+            <Form onSubmit={(e) => handleSubmit(e, "gender")}>
+              <div>
+                <Radio
+                  id="male"
+                  type="radio"
+                  name="gender"
+                  value="male"
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                  }}
+                  checked={gender === "male" ? true : false}
+                />
+                <SmallLabel htmlFor="male">Male</SmallLabel>
+                <Radio
+                  id="female"
+                  type="radio"
+                  name="gender"
+                  value="female"
+                  onChange={(e) => {
+                    setGender(e.target.value);
+                  }}
+                  checked={gender === "female" ? true : false}
+                />
+                <SmallLabel htmlFor="female">Female</SmallLabel>
+              </div>
+              {genderError ? <Error>{genderError}</Error> : null}
+              <Save>Save</Save>
+              <Cancel
+                onClick={() => {
+                  setShowGender(false);
+                  setGenderError("");
+                }}
+              >
+                Cancel
+              </Cancel>
+            </Form>
+          ) : null}
+        </Box>
+        <Box>
           <Label htmlFor="avatar">Avatar</Label>
           <Avatar id="avatar" type="file" />
-        </AvatarForm>
+        </Box>
       </Wrapper>
     </>
   );

@@ -19,6 +19,66 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/change", async (req, res) => {
+  const { token, type, value } = req.body;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    const _id = user.id;
+
+    if (type === "name") {
+      await User.updateOne(
+        { _id },
+        {
+          name: value,
+        }
+      );
+
+      res.json({ status: "ok" });
+    }
+
+    if (type === "username") {
+      await User.updateOne(
+        { _id },
+        {
+          username: value,
+        }
+      );
+
+      res.json({ status: "ok" });
+    }
+
+    if (type === "dateOfBirth") {
+      await User.updateOne(
+        { _id },
+        {
+          dateOfBirth: value,
+        }
+      );
+
+      res.json({ status: "ok" });
+    }
+
+    if (type === "gender") {
+      await User.updateOne(
+        { _id },
+        {
+          gender: value,
+        }
+      );
+
+      res.json({ status: "ok" });
+    }
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.json({
+        status: "duplication",
+        error: `${JSON.stringify(error.keyValue)} already in use`,
+      });
+    }
+    throw error;
+  }
+});
+
 app.post("/fetch-user-data", async (req, res) => {
   const { token } = req.body;
   try {
