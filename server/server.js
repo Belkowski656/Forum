@@ -19,6 +19,70 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/change-email", async (req, res) => {
+  const { token, email } = req.body;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    const _id = user.id;
+
+    await User.updateOne(
+      { _id },
+      {
+        email,
+      }
+    );
+
+    res.json({ status: "ok" });
+  } catch (error) {
+    res.json({ status: "error" });
+  }
+});
+
+app.post("/confirm-email", async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user) {
+    res.json({ status: "error", message: `"${email}" is already in use.` });
+  } else {
+  }
+
+  let verifyCode = "";
+
+  for (let i = 0; i < 6; i++) {
+    verifyCode += Math.floor(Math.random() * 10);
+  }
+
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "belkowski656@gmail.com",
+      pass: emailPassword,
+    },
+  });
+
+  const mailOptions = {
+    from: "belkowski656@gmail.com",
+    to: email,
+    subject: "Confirm Email Change to Forum",
+    text: `<h2>Your verification code to change email is ${verifyCode}</h2>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent:" + info.response);
+    }
+  });
+
+  res.json({ status: "ok", verifyCode });
+});
+
 app.post("/change", async (req, res) => {
   const { token, type, value } = req.body;
   try {

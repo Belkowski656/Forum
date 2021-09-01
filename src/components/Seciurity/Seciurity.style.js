@@ -10,27 +10,11 @@ export const Wrapper = styled.div`
   @media (min-width: 576px) {
     display: flex;
     align-items: flex-start;
-  }
-`;
-
-export const Form = styled.form`
-  padding: 20px 30px;
-  @media (min-width: 576px) {
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
-    width: 50%;
   }
 `;
 
-export const Label = styled.label`
-  display: block;
-  font-size: ${fontStandard};
-  font-weight: bold;
-  color: ${gray};
-  margin-bottom: 20px;
-`;
+export const Form = styled.form``;
 
 export const Text = styled.p`
   display: block;
@@ -45,6 +29,7 @@ export const Input = styled.input`
   height: 50px;
   font-size: ${fontStandard};
   padding: 10px;
+  margin-bottom: 10px;
 
   :focus {
     outline: none;
@@ -52,8 +37,39 @@ export const Input = styled.input`
 `;
 
 export const Save = styled.button`
-  display: block;
   margin-top: 20px;
+  margin-right: 20px;
+  padding: 10px 20px;
+  font-size: ${fontSmall};
+  font-weight: bold;
+  color: white;
+  background-color: ${gray};
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    background-color: ${blue};
+  }
+`;
+
+export const Cancel = styled.button`
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: ${fontSmall};
+  font-weight: bold;
+  color: white;
+  background-color: ${gray};
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    background-color: ${blue};
+  }
+`;
+
+export const Change = styled.button`
   padding: 10px 20px;
   font-size: ${fontSmall};
   font-weight: bold;
@@ -71,10 +87,11 @@ export const Save = styled.button`
 export const Box = styled.div`
   padding: 20px 30px;
   @media (min-width: 576px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 50%;
+    width: 45%;
   }
+`;
+
+export const Error = styled.p`
+  font-size: ${fontSmall};
+  color: red;
 `;
