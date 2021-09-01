@@ -19,7 +19,7 @@ const ProfileInfo = () => {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
-  const [location, setLocation] = useState("");
+  const [username, setUsername] = useState("");
 
   const userData = useContext(DataContext);
 
@@ -38,19 +38,20 @@ const ProfileInfo = () => {
 
     let userAge = "Unknown";
 
-    if (!userData.dateOfBirth === "Unknown") {
-      const now = new Date();
-      const birth = new Date(userData.dateOfBirth);
+    if (userData.dateOfBirth !== "Unknown") {
+      const dateOfBirth = new Date(userData.dateOfBirth);
 
-      userAge = now - birth;
-    } else {
+      const diff = Date.now() - dateOfBirth.getTime();
+      const age = new Date(diff);
+
+      userAge = Math.abs(age.getUTCFullYear() - 1970);
     }
 
     setCreationDate(`${day}/${month}/${year}`);
     setName(userData.name);
     setAge(userAge);
     setGender(userData.gender);
-    setLocation(userData.location);
+    setUsername(userData.username);
   }, [userData]);
 
   return (
@@ -87,17 +88,17 @@ const ProfileInfo = () => {
           </Info>
           <Info>
             <Text>
+              Username:<Value>{username}</Value>
+            </Text>
+          </Info>
+          <Info>
+            <Text>
               Age:<Value>{age}</Value>
             </Text>
           </Info>
           <Info>
             <Text>
               Gender:<Value>{gender}</Value>
-            </Text>
-          </Info>
-          <Info>
-            <Text>
-              Location:<Value>{location}</Value>
             </Text>
           </Info>
         </Informations>
