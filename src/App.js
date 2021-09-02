@@ -23,10 +23,10 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
       sessionStorage.setItem("token", localStorage.getItem("token"));
+    }
 
-      if (sessionStorage.getItem("token")) {
-        setLogged(true);
-      }
+    if (sessionStorage.getItem("token")) {
+      setLogged(true);
     }
   }, []);
   return (
