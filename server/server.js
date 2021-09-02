@@ -19,6 +19,83 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/change-password", async (req, res) => {
+  const { token, newPassword } = req.body;
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    const _id = user.id;
+
+    const password = await bcrypt.hash(newPassword, 10);
+
+    await User.updateOne(
+      { _id },
+      {
+        password,
+      }
+    );
+
+    res.json({ status: "ok" });
+  } catch (error) {
+    res.json({ status: "error" });
+  }
+});
+
+app.post("/confirm-password", async (req, res) => {
+  const { token, currentPassword, newPassword } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const _id = user.id;
+
+  const userData = await User.findOne({ _id });
+
+  if (!(await bcrypt.compare(currentPassword, userData.password))) {
+    return res.json({ status: "error", message: "Invalid password" });
+  }
+
+  if (await bcrypt.compare(newPassword, userData.password)) {
+    return res.json({
+      status: "error",
+      message: "Your new password is the same as the previous one",
+    });
+  }
+
+  const email = userData.email;
+
+  let verifyCode = "";
+
+  for (let i = 0; i < 6; i++) {
+    verifyCode += Math.floor(Math.random() * 10);
+  }
+
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "belkowski656@gmail.com",
+      pass: emailPassword,
+    },
+  });
+
+  const mailOptions = {
+    from: "belkowski656@gmail.com",
+    to: email,
+    subject: "Confirm Password Change to Forum",
+    text: `<h2>Your verification code to change password is ${verifyCode}</h2>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent:" + info.response);
+    }
+  });
+
+  res.json({ status: "ok", verifyCode, newPassword });
+});
+
 app.post("/change-email", async (req, res) => {
   const { token, email } = req.body;
   try {

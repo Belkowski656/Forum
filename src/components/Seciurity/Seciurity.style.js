@@ -94,4 +94,5 @@ export const Box = styled.div`
 export const Error = styled.p`
   font-size: ${fontSmall};
   color: red;
+  margin-bottom: 10px;
 `;
