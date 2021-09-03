@@ -41,7 +41,9 @@ const Profile = () => {
     }).then((res) => res.json());
 
     if (result.status === "ok") {
-      setImage(result.data.avatar);
+      setImage(
+        require(`../../resources/images/avatars/${result.data.avatar}`).default
+      );
       setUsername(result.data.username);
       setuserData(result.data);
     }

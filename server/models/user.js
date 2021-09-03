@@ -9,8 +9,7 @@ const UserSchema = new mongoose.Schema(
     avatar: {
       type: String,
       require: true,
-      default:
-        "https://ams02pap001files.storage.live.com/y4mRdpu_Ugh1hSOtdlEe3uzsOgeIbpaQLdbpEMpOym3F7ec6iNN1Je454zJei9gXrbA-Bh68hw31thcXzd-YV3xALMBYeN72LCrK9-HuFjgC413u_9OziqHtiLmNlclg4lOhGbPnRAeqV6LlZgJHZRcj8evXLjVJ_Xl7EsFjOxdEKBkwyo2v7VdtcJcoj1iYt5J?width=512&height=512&cropmode=none",
+      default: "default.png",
     },
     name: { type: String, require: true, default: "Unknown" },
     dateOfBirth: { type: String, require: true, default: "Unknown" },
