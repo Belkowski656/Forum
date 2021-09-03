@@ -14,9 +14,8 @@ import {
   Username,
   TextWrapper,
   Text,
-  Thumbs,
+  Thumb,
   Like,
-  UnLike,
   Number,
   Replies,
   RepliesTitle,
@@ -46,16 +45,12 @@ const Topix = () => {
               deleniti perspiciatis adipisci delectus???
             </Text>
           </TextWrapper>
-          <Thumbs>
+          <Thumb>
             <Like>
               <i className="fas fa-thumbs-up"></i>
               <Number>10</Number>
             </Like>
-            <UnLike>
-              <i className="fas fa-thumbs-down"></i>
-              <Number>0</Number>
-            </UnLike>
-          </Thumbs>
+          </Thumb>
         </Post>
         <RepliesTitle>Replies</RepliesTitle>
         <Replies>

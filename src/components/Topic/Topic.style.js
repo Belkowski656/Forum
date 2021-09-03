@@ -75,7 +75,7 @@ export const Text = styled.p`
   text-align: justify;
 `;
 
-export const Thumbs = styled.div`
+export const Thumb = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 10px;
