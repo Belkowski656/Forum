@@ -11,7 +11,7 @@ import {
   Like,
   UnLike,
   Number,
-} from "./Replie.style";
+} from "./Reply.style";
 
 import img from "../../resources/images/login.jpg";
 

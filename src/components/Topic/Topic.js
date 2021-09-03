@@ -1,7 +1,7 @@
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import Replie from "../Replie/Replie";
+import Reply from "../Reply/Reply";
 
 import {
   Wrapper,
@@ -59,11 +59,11 @@ const Topix = () => {
         </Post>
         <RepliesTitle>Replies</RepliesTitle>
         <Replies>
-          <Replie />
-          <Replie />
-          <Replie />
-          <Replie />
-          <Replie />
+          <Reply />
+          <Reply />
+          <Reply />
+          <Reply />
+          <Reply />
         </Replies>
       </Wrapper>
       <Footer />

@@ -1,12 +1,12 @@
-import Replie from "../Replie/Replie";
+import Reply from "../Reply/Reply";
 
 const RepliesCreated = () => {
   return (
     <>
-      <Replie />
-      <Replie />
-      <Replie />
-      <Replie />
+      <Reply />
+      <Reply />
+      <Reply />
+      <Reply />
     </>
   );
 };
