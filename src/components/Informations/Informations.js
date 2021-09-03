@@ -14,6 +14,7 @@ import {
   Text,
   Change,
   Cancel,
+  InputToken,
 } from "./Informations.style";
 
 const Informations = () => {
@@ -30,6 +31,7 @@ const Informations = () => {
   const [showUsername, setShowUsername] = useState(false);
   const [showDateOfBirth, setShowDateOfBirth] = useState(false);
   const [showGender, setShowGender] = useState(false);
+  const [showFile, setShowFile] = useState(false);
 
   const [now, setNow] = useState("");
 
@@ -274,8 +276,31 @@ const Informations = () => {
           ) : null}
         </Box>
         <Box>
-          <Label htmlFor="avatar">Avatar</Label>
-          <Avatar id="avatar" type="file" />
+          <Form
+            action="/change-avatar"
+            method="POST"
+            encType="multipart/form-data"
+          >
+            <Label htmlFor="avatar">Avatar</Label>
+            <Avatar
+              id="avatar"
+              name="avatar"
+              accept="image/*"
+              type="file"
+              onClick={() => setShowFile(true)}
+            />
+            <InputToken
+              type="text"
+              defaultValue={sessionStorage.getItem("token")}
+              name="token"
+            />
+            <div>
+              {showFile ? <Save>Save</Save> : null}
+              {showFile ? (
+                <Cancel onClick={() => setShowFile(false)}>Cancle</Cancel>
+              ) : null}
+            </div>
+          </Form>
         </Box>
       </Wrapper>
     </>

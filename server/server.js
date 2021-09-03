@@ -6,6 +6,8 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const uuid = require("uuid").v4;
 
 const User = require("./models/user");
 
@@ -17,6 +19,42 @@ app.use(express.json());
 mongoose.connect("mongodb://localhost:27017/forum", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./src/resources/images/avatars");
+  },
+  filename: (req, file, cb) => {
+    const { originalname } = file;
+    const fileName = `${uuid()}_${originalname}`;
+
+    cb(null, fileName);
+  },
+});
+
+const upload = multer({ storage });
+
+app.post("/change-avatar", upload.single("avatar"), async (req, res) => {
+  const image = req.file.filename;
+  const token = req.body.token;
+
+  console.log(token);
+
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    const _id = user.id;
+
+    await User.updateOne(
+      { _id },
+      {
+        avatar: image,
+      }
+    );
+    res.redirect("/profile/edit");
+  } catch (error) {
+    res.end({ status: "error", error: error });
+  }
 });
 
 app.post("/change-password", async (req, res) => {

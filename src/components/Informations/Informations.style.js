@@ -128,3 +128,7 @@ export const Error = styled.p`
   color: red;
   margin-top: 10px;
 `;
+
+export const InputToken = styled.input`
+  visibility: hidden;
+`;
