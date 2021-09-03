@@ -91,3 +91,12 @@ export const Like = styled.button`
 export const Number = styled.p`
   font-weight: bold;
 `;
+
+export const Replies = styled.div`
+  width: 85%;
+  margin-left: 15%;
+`;
+
+export const Reply = styled.div`
+  margin-bottom: 50px;
+`;
