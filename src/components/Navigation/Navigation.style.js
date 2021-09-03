@@ -120,6 +120,10 @@ export const User = styled.button`
   font-size: ${fontMedium};
   cursor: pointer;
   transition: 0.2s;
+
+  @media (min-width: 992px) {
+    background-color: ${gray};
+  }
 `;
 
 export const Options = styled.ul`
