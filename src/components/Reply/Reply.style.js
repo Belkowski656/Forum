@@ -61,7 +61,7 @@ export const Text = styled.p`
   text-align: justify;
 `;
 
-export const Thumbs = styled.div`
+export const Thumb = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: 10px;
@@ -88,28 +88,6 @@ export const Like = styled.button`
   }
 `;
 
-export const UnLike = styled.button`
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  font-size: 16px;
-  color: ${gray};
-  transition: 0.2s;
-  cursor: pointer;
-
-  i {
-    margin-right: 5px;
-  }
-
-  :hover {
-    color: ${blue};
-  }
-`;
-
 export const Number = styled.p`
   font-weight: bold;
-`;
-
-export const Replie = styled.div`
-  margin-bottom: 20px;
 `;
