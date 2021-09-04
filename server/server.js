@@ -10,6 +10,8 @@ const multer = require("multer");
 const uuid = require("uuid").v4;
 
 const User = require("./models/user");
+const Topic = require("./models/topic");
+const Reply = require("./models/reply");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -19,6 +21,35 @@ app.use(express.json());
 mongoose.connect("mongodb://localhost:27017/forum", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+app.post("/add-topic", async (req, res) => {
+  const { token, category, title, content } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const _id = user.id;
+  const username = user.username;
+
+  const date = new Date();
+
+  const topic = await Topic.create({
+    title,
+    content,
+    category,
+    creatorId: _id,
+    creatorUsername: username,
+    creationDate: date,
+  });
+
+  res.json({ status: "ok", topicId: topic._id });
+});
+
+app.post("/fetch-topics", async (req, res) => {
+  const { category } = req.body;
+
+  const topics = await Topic.find({ category });
+
+  res.json({ status: "ok", topics });
 });
 
 const storage = multer.diskStorage({

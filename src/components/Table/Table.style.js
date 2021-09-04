@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import {
   fontSmall,
   fontStandard,
@@ -61,9 +63,12 @@ export const Td = styled.td`
   padding: 10px;
 `;
 
-export const Title = styled.h3`
+export const Title = styled(Link)`
   color: ${gray};
   margin-bottom: 10px;
+  text-decoration: none;
+  font-size: ${fontStandard};
+  font-weight: bold;
 `;
 
 export const Description = styled.p`

@@ -3,6 +3,7 @@ import { LoggedProvider } from "./Context/loggedContext";
 
 import Home from "./components/Home/Home";
 import Forums from "./components/Forums/Forums";
+import Forum from "./components/Forum/Forum";
 import Topic from "./components/Topic/Topic";
 import Profile from "./components/Profile/Profile";
 import ProfileInfo from "./components/ProfileInfo/ProfileInfo";
@@ -37,7 +38,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/forums" element={<Forums />} />
-            <Route path="/topic" element={<Topic />} />
+            <Route path="/forum/:category" element={<Forum />} />
+            <Route path="/topic/:topicId" element={<Topic />} />
             <Route path="/profile" element={<Profile />}>
               <Route path="/" element={<ProfileInfo />} />
               <Route path="topics" element={<TopicsStarted />} />

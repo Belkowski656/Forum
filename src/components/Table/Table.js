@@ -11,7 +11,8 @@ import {
   TdTime,
 } from "./Table.style";
 
-const Table = ({ type }) => {
+const Table = ({ type, categories }) => {
+  console.log(type);
   return (
     <>
       <Wrapper type={type}>
@@ -30,66 +31,21 @@ const Table = ({ type }) => {
               <i className="far fa-clock"></i>
             </ThIcon>
           </FirstRow>
-          <Row>
-            <Td>
-              <Title>Example Category</Title>
-              <Description>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas,
-                omnis!
-              </Description>
-            </Td>
-            <TdNumber>22</TdNumber>
-            <TdNumber>113</TdNumber>
-            <TdTime>3 weeks, 5 days ago</TdTime>
-          </Row>
-          <Row>
-            <Td>
-              <Title>Example Category</Title>
-              <Description>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas,
-                omnis!
-              </Description>
-            </Td>
-            <TdNumber>22</TdNumber>
-            <TdNumber>113</TdNumber>
-            <TdTime>3 weeks, 5 days ago</TdTime>
-          </Row>
-          <Row>
-            <Td>
-              <Title>Example Category</Title>
-              <Description>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas,
-                omnis!
-              </Description>
-            </Td>
-            <TdNumber>22</TdNumber>
-            <TdNumber>113</TdNumber>
-            <TdTime>3 weeks, 5 days ago</TdTime>
-          </Row>
-          <Row>
-            <Td>
-              <Title>Example Category</Title>
-              <Description>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas,
-                omnis!
-              </Description>
-            </Td>
-            <TdNumber>22</TdNumber>
-            <TdNumber>113</TdNumber>
-            <TdTime>3 weeks, 5 days ago</TdTime>
-          </Row>
-          <Row>
-            <Td>
-              <Title>Example Category</Title>
-              <Description>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas,
-                omnis!
-              </Description>
-            </Td>
-            <TdNumber>22</TdNumber>
-            <TdNumber>113</TdNumber>
-            <TdTime>3 weeks, 5 days ago</TdTime>
-          </Row>
+          {type === "category"
+            ? categories.map((category, i) => (
+                <Row key={i}>
+                  <Td>
+                    <Title to={`/forum/${category.link}`}>
+                      {category.name}
+                    </Title>
+                    <Description>{category.description}</Description>
+                  </Td>
+                  <TdNumber>22</TdNumber>
+                  <TdNumber>113</TdNumber>
+                  <TdTime>3 weeks, 5 days ago</TdTime>
+                </Row>
+              ))
+            : null}
         </tbody>
       </Wrapper>
     </>
