@@ -11,8 +11,8 @@ import {
   TdTime,
 } from "./Table.style";
 
-const Table = ({ type, categories }) => {
-  console.log(type);
+const Table = ({ type, categories, topics }) => {
+  console.log(topics);
   return (
     <>
       <Wrapper type={type}>
@@ -39,6 +39,19 @@ const Table = ({ type, categories }) => {
                       {category.name}
                     </Title>
                     <Description>{category.description}</Description>
+                  </Td>
+                  <TdNumber>22</TdNumber>
+                  <TdNumber>113</TdNumber>
+                  <TdTime>3 weeks, 5 days ago</TdTime>
+                </Row>
+              ))
+            : null}
+          {type === "topic"
+            ? topics.map((topic, i) => (
+                <Row key={i}>
+                  <Td>
+                    <Title to={`/topic/${topic._id}`}>{topic.title}</Title>
+                    <Description>{topic.content}</Description>
                   </Td>
                   <TdNumber>22</TdNumber>
                   <TdNumber>113</TdNumber>

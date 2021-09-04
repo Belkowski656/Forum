@@ -78,7 +78,7 @@ const Forum = () => {
       <Header title={title} text={description} />
       <Wrapper>
         {topics.length ? (
-          <Table type={"topics"} topics={topics} />
+          <Table type={"topic"} topics={topics} />
         ) : (
           <>
             <Text>There is no topic for the {title} category yet.</Text>
