@@ -23,6 +23,15 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/fetch-topic", async (req, res) => {
+  const { topicId } = req.body;
+
+  const topic = await Topic.findOne({ _id: topicId });
+  const user = await User.findOne({ _id: topic.creatorId });
+
+  res.json({ status: "ok", topic, avatar: user.avatar });
+});
+
 app.post("/add-topic", async (req, res) => {
   const { token, category, title, content } = req.body;
 

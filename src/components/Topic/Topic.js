@@ -1,3 +1,6 @@
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -21,34 +24,88 @@ import {
   RepliesTitle,
 } from "./Topic.style";
 
-import img from "../../resources/images/login.jpg";
+// import img from "../../resources/images/login.jpg";
 
-const Topix = () => {
+const Topic = () => {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [username, setUsername] = useState("");
+  const [likes, setLikes] = useState([]);
+  const [id, setId] = useState("");
+  const [date, setDate] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const { topicId } = useParams();
+
+  useEffect(() => {
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const fetchTopic = async () => {
+      const result = await fetch("/fetch-topic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicId,
+        }),
+      }).then((res) => res.json());
+
+      if (result.status === "ok") {
+        const creationDate = new window.Date(result.topic.creationDate);
+
+        setTitle(result.topic.title);
+        setContent(result.topic.content);
+        setUsername(result.topic.creatorUsername);
+        setLikes(result.topic.likes);
+        setId(result.topic.creatorId);
+        setAvatar(
+          require(`../../resources/images/avatars/${result.avatar}`).default
+        );
+
+        setDate(
+          `${
+            months[creationDate.getMonth()]
+          } ${creationDate.getDate()}, ${creationDate.getFullYear()}`
+        );
+      }
+    };
+
+    fetchTopic();
+  }, [topicId]);
+
   return (
     <>
       <Navigation />
-      <Header type={"topic"} title={"Topic Title"} text={""} />
+      <Header type={"topic"} title={title} text={""} />
       <Wrapper>
         <Post>
           <FirstLine>
-            <H4>Post Title??</H4>
-            <Date>August 5, 2021, 13:45</Date>
+            <H4>{title}</H4>
+            <Date>{date}</Date>
           </FirstLine>
           <User>
-            <Img img={img} />
-            <Username href="#">Example username</Username>
+            <Img img={avatar} />
+            <Username href="#">{username}</Username>
           </User>
           <TextWrapper>
-            <Text>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Facilis
-              reprehenderit exercitationem veritatis tempora, in pariatur? Quasi
-              deleniti perspiciatis adipisci delectus???
-            </Text>
+            <Text>{content}</Text>
           </TextWrapper>
           <Thumb>
             <Like>
               <i className="fas fa-thumbs-up"></i>
-              <Number>10</Number>
+              <Number>{likes.length}</Number>
             </Like>
           </Thumb>
         </Post>
@@ -66,4 +123,4 @@ const Topix = () => {
   );
 };
 
-export default Topix;
+export default Topic;
