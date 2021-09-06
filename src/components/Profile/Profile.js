@@ -63,7 +63,7 @@ const Profile = () => {
           <Img img={image} />
           <Menu>
             <MenuElement>
-              <StyledLink to="/profile/me">Profile</StyledLink>
+              <StyledLink to={`/profile/${userId}`}>Profile</StyledLink>
             </MenuElement>
             <MenuElement>
               <StyledLink to="topics">Topics Started</StyledLink>

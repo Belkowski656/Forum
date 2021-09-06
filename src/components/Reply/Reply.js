@@ -118,7 +118,7 @@ const Replie = ({
         </FirstLine>
         <User>
           <Img img={img} />
-          <Username href="#">{creatorUsername}</Username>
+          <Username to={`/profile/${creatorId}`}>{creatorUsername}</Username>
         </User>
         <TextWrapper>
           <Text>{content}</Text>
@@ -137,7 +137,7 @@ const Replie = ({
           </FirstLine>
           <User>
             <Img img={img} />
-            <Username href="#">Example username</Username>
+            {/* <Username href="#">Example username</Username> */}
           </User>
           <TextWrapper>
             <Text>
