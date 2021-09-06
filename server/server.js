@@ -26,8 +26,9 @@ mongoose.connect("mongodb://localhost:27017/forum", {
 app.get("/fetch-topics-and-replies", async (req, res) => {
   const topics = await Topic.find({});
   const replies = await Reply.find({});
+  const users = await User.find({});
 
-  res.json({ status: "ok", topics, replies });
+  res.json({ status: "ok", topics, replies, users: users.length });
 });
 
 app.post("/fetch-topic", async (req, res) => {

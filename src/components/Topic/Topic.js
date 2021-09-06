@@ -24,8 +24,6 @@ import {
   RepliesTitle,
 } from "./Topic.style";
 
-// import img from "../../resources/images/login.jpg";
-
 const Topic = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -84,7 +82,7 @@ const Topic = () => {
 
     fetchTopic();
   }, [topicId]);
-
+  console.log(id);
   return (
     <>
       <Navigation />

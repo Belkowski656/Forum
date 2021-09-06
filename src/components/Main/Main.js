@@ -54,9 +54,10 @@ const categories = [
 const Main = () => {
   const [topics, setTopics] = useState([]);
   const [replies, setReplies] = useState([]);
+  const [users, setUsers] = useState(0);
 
   useEffect(() => {
-    const fetchTopicsAndReplies = async () => {
+    const fetchTopicsAndRepliesAndUsers = async () => {
       const result = await fetch("/fetch-topics-and-replies").then((res) =>
         res.json()
       );
@@ -64,10 +65,11 @@ const Main = () => {
       if (result.status === "ok") {
         setTopics(result.topics);
         setReplies(result.replies);
+        setUsers(result.users);
       }
     };
 
-    fetchTopicsAndReplies();
+    fetchTopicsAndRepliesAndUsers();
   }, []);
 
   return (
@@ -76,11 +78,11 @@ const Main = () => {
         <StatsBox>
           <Box>
             <Icon>
-              <i className="fas fa-thumbtack"></i>
+              <i className="fas fa-users"></i>
             </Icon>
             <TextWrapper>
-              <Text>Posts</Text>
-              <Number>20</Number>
+              <Text>Users</Text>
+              <Number>{users}</Number>
             </TextWrapper>
           </Box>
           <Box>
@@ -89,7 +91,7 @@ const Main = () => {
             </Icon>
             <TextWrapper>
               <Text>Topics</Text>
-              <Number>159</Number>
+              <Number>{topics.length}</Number>
             </TextWrapper>
           </Box>
           <Box>
@@ -98,7 +100,7 @@ const Main = () => {
             </Icon>
             <TextWrapper>
               <Text>Replies</Text>
-              <Number>363</Number>
+              <Number>{replies.length}</Number>
             </TextWrapper>
           </Box>
         </StatsBox>
