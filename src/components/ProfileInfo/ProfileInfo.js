@@ -44,7 +44,7 @@ const ProfileInfo = () => {
       const diff = Date.now() - dateOfBirth.getTime();
       const age = new Date(diff);
 
-      userAge = Math.abs(age.getUTCFullYear() - 1970);
+      userAge = Math.abs(age.getUTCFullYear() - 1970).toString();
     }
 
     setCreationDate(`${day}/${month}/${year}`);
