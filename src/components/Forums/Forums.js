@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Table from "../Table/Table";
@@ -45,6 +47,24 @@ const categories = [
 ];
 
 const Forums = () => {
+  const [topics, setTopics] = useState([]);
+  const [replies, setReplies] = useState([]);
+
+  useEffect(() => {
+    const fetchTopicsAndReplies = async () => {
+      const result = await fetch("/fetch-topics-and-replies").then((res) =>
+        res.json()
+      );
+
+      if (result.status === "ok") {
+        setTopics(result.topics);
+        setReplies(result.replies);
+      }
+    };
+
+    fetchTopicsAndReplies();
+  }, []);
+
   return (
     <>
       <Navigation />
@@ -54,7 +74,12 @@ const Forums = () => {
         text={"Internet Forum for Everyone!!!"}
       />
       <Wrapper>
-        <Table type={"category"} categories={categories} />
+        <Table
+          type={"category"}
+          categories={categories}
+          topics={topics}
+          replies={replies}
+        />
       </Wrapper>
       <Footer />
     </>

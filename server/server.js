@@ -23,6 +23,13 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.get("/fetch-topics-and-replies", async (req, res) => {
+  const topics = await Topic.find({});
+  const replies = await Reply.find({});
+
+  res.json({ status: "ok", topics, replies });
+});
+
 app.post("/fetch-topic", async (req, res) => {
   const { topicId } = req.body;
 
