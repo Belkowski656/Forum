@@ -1,14 +1,9 @@
 import styled from "styled-components";
-import {
-  blue,
-  fontStandard,
-  gray,
-  lightGray,
-} from "../../resources/variables/variables";
+import { blue, fontStandard, gray } from "../../resources/variables/variables";
 
 export const Wrapper = styled.footer`
   background-color: ${gray};
-  color: ${lightGray};
+  color: white;
 `;
 
 export const Content = styled.div`
@@ -32,7 +27,7 @@ export const Up = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  color: ${lightGray};
+  color: white;
   background-color: ${blue};
   font-size: ${fontStandard};
   cursor: pointer;
