@@ -29,6 +29,7 @@ const Topic = () => {
   const [content, setContent] = useState("");
   const [username, setUsername] = useState("");
   const [likes, setLikes] = useState([]);
+  const [isLiked, setIsLiked] = useState(false);
   const [id, setId] = useState("");
   const [date, setDate] = useState("");
   const [avatar, setAvatar] = useState("");
@@ -82,7 +83,41 @@ const Topic = () => {
 
     fetchTopic();
   }, [topicId]);
-  console.log(id);
+
+  useEffect(() => {
+    const checkIsLiked = async () => {
+      const result = await fetch("/is-liked", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicId,
+          token: sessionStorage.getItem("token"),
+        }),
+      }).then((res) => res.json());
+
+      if (result.status === "ok") {
+        setIsLiked(result.isLiked);
+      }
+    };
+
+    checkIsLiked();
+  }, [likes, topicId]);
+
+  const toggleLike = async () => {
+    const result = await fetch("/toggle-like", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        topicId,
+        token: sessionStorage.getItem("token"),
+      }),
+    }).then((res) => res.json());
+
+    if (result.status === "ok") {
+      setLikes(result.likes);
+    }
+  };
+
   return (
     <>
       <Navigation />
@@ -101,7 +136,7 @@ const Topic = () => {
             <Text>{content}</Text>
           </TextWrapper>
           <Thumb>
-            <Like>
+            <Like onClick={toggleLike} active={isLiked}>
               <i className="fas fa-thumbs-up"></i>
               <Number>{likes.length}</Number>
             </Like>
@@ -109,10 +144,6 @@ const Topic = () => {
         </Post>
         <RepliesTitle>Replies</RepliesTitle>
         <Replies>
-          <Reply />
-          <Reply />
-          <Reply />
-          <Reply />
           <Reply />
         </Replies>
       </Wrapper>

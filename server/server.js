@@ -23,6 +23,45 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/is-liked", async (req, res) => {
+  const { topicId, token } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const topic = await Topic.findOne({ _id: topicId });
+
+  if (topic.likes.includes(user.id)) {
+    res.json({ status: "ok", isLiked: true });
+  } else {
+    res.json({ status: "ok", isLiked: false });
+  }
+});
+
+app.post("/toggle-like", async (req, res) => {
+  const { topicId, token } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const topic = await Topic.findOne({ _id: topicId });
+
+  if (topic.likes.includes(user.id)) {
+    await Topic.updateOne(
+      { _id: topicId },
+      {
+        $pull: { likes: user.id },
+      }
+    );
+  } else {
+    await Topic.updateOne(
+      { _id: topicId },
+      {
+        $push: { likes: user.id },
+      }
+    );
+  }
+
+  const topicLikes = await Topic.findOne({ _id: topicId });
+  res.json({ status: "ok", likes: topicLikes.likes });
+});
+
 app.get("/fetch-topics-and-replies", async (req, res) => {
   const topics = await Topic.find({});
   const replies = await Reply.find({});

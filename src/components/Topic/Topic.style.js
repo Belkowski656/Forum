@@ -88,7 +88,7 @@ export const Like = styled.button`
   align-items: center;
   padding: 5px;
   font-size: 16px;
-  color: ${gray};
+  color: ${({ active }) => (active ? blue : gray)};
   margin-right: 10px;
   transition: 0.2s;
   cursor: pointer;
