@@ -153,7 +153,7 @@ const Topic = () => {
           </FirstLine>
           <User>
             <Img img={avatar} />
-            <Username href="#">{username}</Username>
+            <Username to={`/profile/${id}`}>{username}</Username>
           </User>
           <TextWrapper>
             <Text>{content}</Text>

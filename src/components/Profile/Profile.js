@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { Outlet, useParams } from "react-router-dom";
+import { useEffect, useState, useContext, useCallback } from "react";
 
 import { DataProvider } from "../../Context/dataContext";
 import LoggedContext from "../../Context/loggedContext";
@@ -23,6 +23,8 @@ const Profile = () => {
   const [image, setImage] = useState("");
   const [userData, setuserData] = useState("");
 
+  const { userId } = useParams();
+
   const setLogged = useContext(LoggedContext).setLogged;
 
   const handleLogout = () => {
@@ -31,12 +33,13 @@ const Profile = () => {
     setLogged(false);
   };
 
-  const fetchUserData = async () => {
+  const fetchUserData = useCallback(async () => {
     const result = await fetch("/fetch-user-data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: sessionStorage.getItem("token"),
+        userId,
       }),
     }).then((res) => res.json());
 
@@ -47,9 +50,9 @@ const Profile = () => {
       setUsername(result.data.username);
       setuserData(result.data);
     }
-  };
+  }, [userId]);
 
-  useEffect(() => fetchUserData(), []);
+  useEffect(() => fetchUserData(), [fetchUserData]);
 
   return (
     <>
@@ -60,7 +63,7 @@ const Profile = () => {
           <Img img={image} />
           <Menu>
             <MenuElement>
-              <StyledLink to="/profile">Profile</StyledLink>
+              <StyledLink to="/profile/me">Profile</StyledLink>
             </MenuElement>
             <MenuElement>
               <StyledLink to="topics">Topics Started</StyledLink>
@@ -68,14 +71,18 @@ const Profile = () => {
             <MenuElement>
               <StyledLink to="replies">Replies Created</StyledLink>
             </MenuElement>
-            <MenuElement>
-              <StyledLink to="edit">Edit Profile</StyledLink>
-            </MenuElement>
-            <MenuElement>
-              <StyledLink onClick={handleLogout} to="/login">
-                Logout
-              </StyledLink>
-            </MenuElement>
+            {userId === "ok" ? (
+              <>
+                <MenuElement>
+                  <StyledLink to="edit">Edit Profile</StyledLink>
+                </MenuElement>
+                <MenuElement>
+                  <StyledLink onClick={handleLogout} to="/login">
+                    Logout
+                  </StyledLink>
+                </MenuElement>
+              </>
+            ) : null}
           </Menu>
         </SideNav>
         <Content>

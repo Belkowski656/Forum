@@ -57,7 +57,7 @@ const Navigation = () => {
               <i className="fa fa-user"></i>
               <Options active={menuActive}>
                 <Option>
-                  <StyledOption to="/profile">Account</StyledOption>
+                  <StyledOption to="/profile/me">Account</StyledOption>
                 </Option>
                 <Option>
                   <StyledOption onClick={handleLogout} to="/login">

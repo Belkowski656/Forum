@@ -42,7 +42,7 @@ const App = () => {
               <Route path="/forums" element={<Forums />} />
               <Route path="/forum/:category" element={<Forum />} />
               <Route path="/topic/:topicId" element={<Topic />} />
-              <Route path="/profile" element={<Profile />}>
+              <Route path="/profile/:userId" element={<Profile />}>
                 <Route path="/" element={<ProfileInfo />} />
                 <Route path="topics" element={<TopicsStarted />} />
                 <Route path="replies" element={<RepliesCreated />} />

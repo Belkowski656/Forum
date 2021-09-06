@@ -430,17 +430,27 @@ app.post("/change", async (req, res) => {
 });
 
 app.post("/fetch-user-data", async (req, res) => {
-  const { token } = req.body;
-  try {
-    const user = jwt.verify(token, JWT_SECRET);
+  const { token, userId } = req.body;
+  if (userId === "me") {
+    try {
+      const user = jwt.verify(token, JWT_SECRET);
 
-    const _id = user.id;
+      const _id = user.id;
 
-    const userData = await User.findOne({ _id }).lean();
+      const userData = await User.findOne({ _id }).lean();
 
-    res.json({ status: "ok", data: userData });
-  } catch (error) {
-    res.json({ status: "error", error: error });
+      res.json({ status: "ok", data: userData });
+    } catch (error) {
+      res.json({ status: "error", error: error });
+    }
+  } else {
+    try {
+      const userData = await User.findOne({ _id: userId }).lean();
+
+      res.json({ status: "ok", data: userData });
+    } catch (error) {
+      res.json({ status: "error", error: error });
+    }
   }
 });
 

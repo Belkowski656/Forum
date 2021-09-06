@@ -54,7 +54,7 @@ export const Img = styled.div`
   border-radius: 50%;
 `;
 
-export const Username = styled.a`
+export const Username = styled(Link)`
   color: ${gray};
   font-weight: bold;
   text-decoration: none;
