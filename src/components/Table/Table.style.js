@@ -101,13 +101,16 @@ export const TdNumber = styled.td`
 `;
 
 export const TdUser = styled.td`
-  color: #6b717e;
-  font-weight: bold;
-  font-size: ${fontSmall};
   padding: 40px 10px;
   border: 1px solid gray;
   text-align: center;
-  cursor: pointer;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #6b717e;
+  font-weight: bold;
+  font-size: ${fontSmall};
   transition: 0.2s;
 
   :hover {

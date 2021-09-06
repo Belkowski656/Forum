@@ -10,6 +10,7 @@ import {
   TdNumber,
   TdUser,
   TdTime,
+  StyledLink,
 } from "./Table.style";
 
 const Table = ({ type, categories, topics, replies }) => {
@@ -97,7 +98,11 @@ const Table = ({ type, categories, topics, replies }) => {
                     <Title to={`/topic/${topic._id}`}>{topic.title}</Title>
                     <Description>{topic.content}</Description>
                   </Td>
-                  <TdUser>{topic.creatorUsername}</TdUser>
+                  <TdUser>
+                    <StyledLink to={`/profile/${topic.creatorId}`}>
+                      {topic.creatorUsername}
+                    </StyledLink>
+                  </TdUser>
                   <TdNumber>
                     {
                       replies.filter((reply) => reply.replyTo === topic._id)
