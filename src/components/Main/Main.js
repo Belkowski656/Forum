@@ -58,9 +58,7 @@ const Main = () => {
 
   useEffect(() => {
     const fetchTopicsAndRepliesAndUsers = async () => {
-      const result = await fetch("/fetch-topics-and-replies").then((res) =>
-        res.json()
-      );
+      const result = await fetch("/fetch-data").then((res) => res.json());
 
       if (result.status === "ok") {
         setTopics(result.topics);

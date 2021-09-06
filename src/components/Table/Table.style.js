@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 import {
+  blue,
   fontSmall,
   fontStandard,
   gray,
@@ -69,6 +70,11 @@ export const Title = styled(Link)`
   text-decoration: none;
   font-size: ${fontStandard};
   font-weight: bold;
+  transition: 0.2s;
+
+  :hover {
+    color: ${blue};
+  }
 `;
 
 export const Description = styled.p`
@@ -91,6 +97,21 @@ export const TdNumber = styled.td`
     :nth-child(3) {
       display: table-cell;
     }
+  }
+`;
+
+export const TdUser = styled.td`
+  color: #6b717e;
+  font-weight: bold;
+  font-size: ${fontSmall};
+  padding: 40px 10px;
+  border: 1px solid gray;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+
+  :hover {
+    color: ${blue};
   }
 `;
 

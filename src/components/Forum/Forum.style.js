@@ -25,7 +25,8 @@ export const Box = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border-top: 1px solid black;
+  max-width: 1400px;
+  margin: 50px auto;
 `;
 
 export const Login = styled(Link)`

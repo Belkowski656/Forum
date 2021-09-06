@@ -26,6 +26,22 @@ mongoose.connect("mongodb://localhost:27017/forum", {
 app.get("/fetch-topics-and-replies", async (req, res) => {
   const topics = await Topic.find({});
   const replies = await Reply.find({});
+
+  res.json({ status: "ok", topics, replies });
+});
+
+app.post("/fetch-category-data", async (req, res) => {
+  const { category } = req.body;
+
+  const topics = await Topic.find({ category });
+  const replies = await Reply.find({ category });
+
+  res.json({ status: "ok", topics, replies });
+});
+
+app.get("/fetch-data", async (req, res) => {
+  const topics = await Topic.find({});
+  const replies = await Reply.find({});
   const users = await User.find({});
 
   res.json({ status: "ok", topics, replies, users: users.length });
@@ -59,14 +75,6 @@ app.post("/add-topic", async (req, res) => {
   });
 
   res.json({ status: "ok", topicId: topic._id });
-});
-
-app.post("/fetch-topics", async (req, res) => {
-  const { category } = req.body;
-
-  const topics = await Topic.find({ category });
-
-  res.json({ status: "ok", topics });
 });
 
 const storage = multer.diskStorage({

@@ -14,15 +14,16 @@ import { Wrapper, Text, Img, Login, Box } from "./Forum.style";
 import img from "../../resources/images/empty.png";
 
 const Forum = () => {
-  const [topics, setTopics] = useState("");
+  const [topics, setTopics] = useState([]);
+  const [replies, setReplies] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const { category } = useParams();
   const logged = useContext(LoggedContext).logged;
 
-  const fetchTopics = useCallback(async () => {
-    const result = await fetch("/fetch-topics", {
+  const fetchTopicsAndReplies = useCallback(async () => {
+    const result = await fetch("/fetch-category-data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -31,6 +32,7 @@ const Forum = () => {
     }).then((res) => res.json());
     if (result.status === "ok") {
       setTopics(result.topics);
+      setReplies(result.replies);
     }
   }, [category]);
 
@@ -69,8 +71,8 @@ const Forum = () => {
   }, [category]);
 
   useEffect(() => {
-    fetchTopics();
-  }, [category, fetchTopics]);
+    fetchTopicsAndReplies();
+  }, [category, fetchTopicsAndReplies]);
 
   return (
     <>
@@ -78,7 +80,7 @@ const Forum = () => {
       <Header title={title} text={description} />
       <Wrapper>
         {topics.length ? (
-          <Table type={"topic"} topics={topics} />
+          <Table type={"topic"} topics={topics} replies={replies} />
         ) : (
           <>
             <Text>There is no topic for the {title} category yet.</Text>

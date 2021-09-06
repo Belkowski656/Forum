@@ -8,6 +8,7 @@ import {
   Title,
   Description,
   TdNumber,
+  TdUser,
   TdTime,
 } from "./Table.style";
 
@@ -50,7 +51,11 @@ const Table = ({ type, categories, topics, replies }) => {
               {type === "topic" || type === "user" ? "Topic" : "Category"}
             </Th>
             <ThIcon>
-              <i className="fas fa-comment"></i>
+              {type === "topic" ? (
+                <i className="fas fa-user"></i>
+              ) : (
+                <i className="fas fa-comment"></i>
+              )}
             </ThIcon>
             <ThIcon>
               <i className="fas fa-comments"></i>
@@ -92,8 +97,13 @@ const Table = ({ type, categories, topics, replies }) => {
                     <Title to={`/topic/${topic._id}`}>{topic.title}</Title>
                     <Description>{topic.content}</Description>
                   </Td>
-                  <TdNumber>22</TdNumber>
-                  <TdNumber>113</TdNumber>
+                  <TdUser>{topic.creatorUsername}</TdUser>
+                  <TdNumber>
+                    {
+                      replies.filter((reply) => reply.replyTo === topic._id)
+                        .length
+                    }
+                  </TdNumber>
                   <TdTime>3 weeks, 5 days ago</TdTime>
                 </Row>
               ))
