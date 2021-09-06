@@ -4,6 +4,7 @@ import {
   fontSmall,
   gray,
   lightGrayFont,
+  fontStandard,
 } from "../../resources/variables/variables";
 
 export const Wrapper = styled.div`
@@ -15,6 +16,13 @@ export const Wrapper = styled.div`
 export const FirstLine = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 10px;
+`;
+
+export const H4 = styled.h4`
+  font-size: ${fontStandard};
+  font-weight: bold;
+  text-transform: uppercase;
+  color: ${gray};
 `;
 
 export const Date = styled.p`
@@ -74,7 +82,7 @@ export const Like = styled.button`
   align-items: center;
   padding: 5px;
   font-size: 16px;
-  color: ${gray};
+  color: ${({ active }) => (active ? blue : gray)};
   margin-right: 10px;
   transition: 0.2s;
   cursor: pointer;

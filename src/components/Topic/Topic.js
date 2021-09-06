@@ -1,10 +1,13 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import Navigation from "../Navigation/Navigation";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Reply from "../Reply/Reply";
+import Add from "../Add/Add";
+
+import LoggedContext from "../../Context/loggedContext";
 
 import {
   Wrapper,
@@ -22,6 +25,8 @@ import {
   Number,
   Replies,
   RepliesTitle,
+  Box,
+  Login,
 } from "./Topic.style";
 
 const Topic = () => {
@@ -33,6 +38,9 @@ const Topic = () => {
   const [id, setId] = useState("");
   const [date, setDate] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [replies, setReplies] = useState([]);
+
+  const logged = useContext(LoggedContext).logged;
 
   const { topicId } = useParams();
 
@@ -81,7 +89,22 @@ const Topic = () => {
       }
     };
 
+    const fetchReplies = async () => {
+      const result = await fetch("/fetch-replies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicId,
+        }),
+      }).then((res) => res.json());
+
+      if (result.status === "ok") {
+        setReplies(result.replies);
+      }
+    };
+
     fetchTopic();
+    fetchReplies();
   }, [topicId]);
 
   useEffect(() => {
@@ -144,7 +167,28 @@ const Topic = () => {
         </Post>
         <RepliesTitle>Replies</RepliesTitle>
         <Replies>
-          <Reply />
+          {replies.map((reply, i) => (
+            <Reply
+              key={i}
+              id={reply._id}
+              title={reply.title}
+              content={reply.content}
+              creatorId={reply.creatorId}
+              creatorUsername={reply.creatorUsername}
+              creationDate={reply.creationDate}
+              likes={reply.likes}
+            />
+          ))}
+          <Box>
+            {logged ? (
+              <Add action="reply" />
+            ) : (
+              <>
+                <Text>You must be logged in to add a topic</Text>
+                <Login to="/login">Login</Login>
+              </>
+            )}
+          </Box>
         </Replies>
       </Wrapper>
       <Footer />

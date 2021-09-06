@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+
 import {
   blue,
   fontMedium,
@@ -136,4 +138,21 @@ export const RepliesTitle = styled.p`
 
 export const Replie = styled.div`
   margin-bottom: 20px;
+`;
+
+export const Box = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1400px;
+  margin: 50px auto;
+`;
+
+export const Login = styled(Link)`
+  text-decoration: none;
+  color: white;
+  background-color: ${blue};
+  padding: 10px 20px;
+  font-weight: bold;
+  margin-top: 20px;
 `;

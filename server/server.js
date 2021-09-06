@@ -23,6 +23,82 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/is-liked-reply", async (req, res) => {
+  const { replyId, token } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const reply = await Reply.findOne({ _id: replyId });
+
+  if (reply.likes.includes(user.id)) {
+    res.json({ status: "ok", isLiked: true });
+  } else {
+    res.json({ status: "ok", isLiked: false });
+  }
+});
+
+app.post("/toggle-like-reply", async (req, res) => {
+  const { replyId, token } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const reply = await Reply.findOne({ _id: replyId });
+
+  if (reply.likes.includes(user.id)) {
+    await Reply.updateOne(
+      { _id: replyId },
+      {
+        $pull: { likes: user.id },
+      }
+    );
+  } else {
+    await Reply.updateOne(
+      { _id: replyId },
+      {
+        $push: { likes: user.id },
+      }
+    );
+  }
+
+  const replyLikes = await Reply.findOne({ _id: replyId });
+  res.json({ status: "ok", likes: replyLikes.likes });
+});
+
+app.post("/fetch-avatar", async (req, res) => {
+  const { creatorId } = req.body;
+
+  const avatar = await User.findOne({ _id: creatorId });
+
+  res.json({ status: "ok", avatar: avatar.avatar });
+});
+
+app.post("/fetch-replies", async (req, res) => {
+  const { topicId } = req.body;
+
+  const replies = await Reply.find({ replyTo: topicId });
+
+  res.json({ status: "ok", replies });
+});
+
+app.post("/add-reply", async (req, res) => {
+  const { token, topicId, title, content } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const _id = user.id;
+  const username = user.username;
+
+  const date = new Date();
+
+  await Reply.create({
+    title,
+    content,
+    replyTo: topicId,
+    creatorId: _id,
+    creatorUsername: username,
+    creationDate: date,
+  });
+
+  res.json({ status: "ok" });
+});
+
 app.post("/is-liked", async (req, res) => {
   const { topicId, token } = req.body;
 

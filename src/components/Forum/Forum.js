@@ -89,7 +89,7 @@ const Forum = () => {
         )}
         <Box>
           {logged ? (
-            <Add />
+            <Add action="topic" />
           ) : (
             <>
               <Text>You must be logged in to add a topic</Text>
