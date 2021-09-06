@@ -14,6 +14,7 @@ import Informations from "./components/Informations/Informations";
 import Seciurity from "./components/Seciurity/Seciurity";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import { GlobalStyles } from "./GlobalStyles";
 import { useEffect, useState } from "react";
@@ -33,26 +34,28 @@ const App = () => {
   return (
     <>
       <Router>
-        <GlobalStyles />
-        <LoggedProvider value={{ logged, setLogged }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/forums" element={<Forums />} />
-            <Route path="/forum/:category" element={<Forum />} />
-            <Route path="/topic/:topicId" element={<Topic />} />
-            <Route path="/profile" element={<Profile />}>
-              <Route path="/" element={<ProfileInfo />} />
-              <Route path="topics" element={<TopicsStarted />} />
-              <Route path="replies" element={<RepliesCreated />} />
-              <Route path="edit" element={<EditProfile />}>
-                <Route path="/" element={<Informations />} />
-                <Route path="seciurity" element={<Seciurity />} />
+        <ScrollToTop>
+          <GlobalStyles />
+          <LoggedProvider value={{ logged, setLogged }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/forums" element={<Forums />} />
+              <Route path="/forum/:category" element={<Forum />} />
+              <Route path="/topic/:topicId" element={<Topic />} />
+              <Route path="/profile" element={<Profile />}>
+                <Route path="/" element={<ProfileInfo />} />
+                <Route path="topics" element={<TopicsStarted />} />
+                <Route path="replies" element={<RepliesCreated />} />
+                <Route path="edit" element={<EditProfile />}>
+                  <Route path="/" element={<Informations />} />
+                  <Route path="seciurity" element={<Seciurity />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </LoggedProvider>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </LoggedProvider>
+        </ScrollToTop>
       </Router>
     </>
   );
