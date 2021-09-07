@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 
 import { Wrapper, H2, Form, Input, Textarea, Button, Error } from "./Add.style";
 
-const Add = ({ action }) => {
+const Add = ({ action, setReply, id }) => {
   const [title, setTitle] = useState("");
   const [titleError, setTitleError] = useState("");
   const [content, setContent] = useState("");
@@ -31,6 +31,7 @@ const Add = ({ action }) => {
     } else {
       setContentError("");
     }
+
     if (action === "topic") {
       const result = await fetch("/add-topic", {
         method: "POST",
@@ -46,7 +47,7 @@ const Add = ({ action }) => {
       if (result.status === "ok") {
         document.location.href = `/topic/${result.topicId}`;
       }
-    } else {
+    } else if (action === "reply") {
       const result = await fetch("/add-reply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -55,7 +56,22 @@ const Add = ({ action }) => {
           topicId,
           title,
           content,
-          category,
+        }),
+      }).then((res) => res.json());
+
+      if (result.status === "ok") {
+        document.location.href = `/topic/${topicId}`;
+      }
+    } else {
+      const result = await fetch("/add-answer-to-reply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: sessionStorage.getItem("token"),
+          topicId,
+          title,
+          content,
+          answerTo: id,
         }),
       }).then((res) => res.json());
 
@@ -89,6 +105,15 @@ const Add = ({ action }) => {
           />
           {contentError ? <Error>{contentError}</Error> : null}
           <Button>Add</Button>
+          {action === "answerToReply" ? (
+            <Button
+              onClick={() => {
+                setReply(false);
+              }}
+            >
+              Cancel
+            </Button>
+          ) : null}
         </Form>
       </Wrapper>
     </>

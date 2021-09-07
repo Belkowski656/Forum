@@ -11,6 +11,7 @@ const ReplySchema = new mongoose.Schema(
     creationDate: { type: Date, require: true },
     likes: [],
     replyTo: { type: String, require: true },
+    answerTo: { type: String, required: true },
   },
   { collection: "replies" }
 );

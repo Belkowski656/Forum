@@ -177,6 +177,7 @@ const Topic = () => {
               creatorUsername={reply.creatorUsername}
               creationDate={reply.creationDate}
               likes={reply.likes}
+              answerTo={reply.answerTo}
             />
           ))}
           <Box>

@@ -11,7 +11,9 @@ import {
 export const Wrapper = styled.div`
   color: ${lightGrayFont};
   max-width: 800px;
-  margin: 0 auto 50px;
+  width: 90%;
+  margin-left: auto;
+  margin-bottom: 50px;
 `;
 
 export const FirstLine = styled.div`
@@ -92,23 +94,6 @@ export const Like = styled.button`
   i {
     margin-right: 5px;
   }
-
-  :hover {
-    color: ${blue};
-  }
-`;
-
-export const ReplyWrapper = styled.div`
-  max-width: 400px;
-  margin: 0 auto 50px;
-`;
-
-export const ReplyTo = styled.button`
-  padding: 5px;
-  font-size: 16px;
-  margin-right: 10px;
-  transition: 0.2s;
-  cursor: pointer;
 
   :hover {
     color: ${blue};

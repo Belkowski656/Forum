@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-
-import Add from "../Add/Add";
-import Answer from "../Answer/Answer";
+import { useState, useEffect } from "react";
 
 import {
   Wrapper,
@@ -14,28 +11,23 @@ import {
   Text,
   Like,
   Number,
-  ReplyWrapper,
-  ReplyTo,
   H4,
   LastLine,
-} from "./Reply.style";
+} from "./Answer.style";
 
-const Replie = ({
+const Answer = ({
   id,
   title,
-  content,
-  creatorUsername,
-  likes,
   creationDate,
+  creatorUsername,
   creatorId,
-  answerTo,
+  content,
+  likes,
 }) => {
   const [date, setDate] = useState("");
   const [img, setImg] = useState("");
   const [likesArr, setLikesArr] = useState(likes);
   const [isLiked, setIsLiked] = useState(false);
-  const [reply, setReply] = useState(false);
-  const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     const months = [
@@ -100,24 +92,6 @@ const Replie = ({
     checkIsLiked();
   }, [likesArr, id]);
 
-  useEffect(() => {
-    const checkAnswers = async () => {
-      const result = await fetch("/check-answers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          replyId: id,
-        }),
-      }).then((res) => res.json());
-
-      if (result.status === "ok") {
-        setAnswers(result.answers);
-      }
-    };
-
-    checkAnswers();
-  }, [id]);
-
   const toggleLike = async () => {
     const result = await fetch("/toggle-like-reply", {
       method: "POST",
@@ -134,50 +108,26 @@ const Replie = ({
   };
 
   return (
-    <>
-      {answerTo === "none" ? (
-        <Wrapper>
-          <FirstLine>
-            <H4>{title}</H4>
-            <Date>{date}</Date>
-          </FirstLine>
-          <User>
-            <Img img={img} />
-            <Username to={`/profile/${creatorId}`}>{creatorUsername}</Username>
-          </User>
-          <TextWrapper>
-            <Text>{content}</Text>
-          </TextWrapper>
-          <LastLine>
-            <ReplyTo onClick={() => setReply(true)}>Reply</ReplyTo>
-            <Like onClick={() => toggleLike("")} active={isLiked}>
-              <i className="fas fa-thumbs-up"></i>
-              <Number>{likesArr.length}</Number>
-            </Like>
-          </LastLine>
-        </Wrapper>
-      ) : null}
-      <ReplyWrapper>
-        {reply ? (
-          <Add action={"answerToReply"} setReply={setReply} id={id} />
-        ) : null}
-      </ReplyWrapper>
-      {answers.length
-        ? answers.map((answer, i) => (
-            <Answer
-              key={i}
-              id={answer._id}
-              title={answer.title}
-              content={answer.content}
-              creationDate={answer.creationDate}
-              creatorUsername={answer.creatorUsername}
-              creatorId={answer.creatorId}
-              likes={answer.likes}
-            />
-          ))
-        : null}
-    </>
+    <Wrapper>
+      <FirstLine>
+        <H4>{title}</H4>
+        <Date>{date}</Date>
+      </FirstLine>
+      <User>
+        <Img img={img} />
+        <Username to={`/profile/${creatorId}`}>{creatorUsername}</Username>
+      </User>
+      <TextWrapper>
+        <Text>{content}</Text>
+      </TextWrapper>
+      <LastLine>
+        <Like onClick={toggleLike} active={isLiked}>
+          <i className="fas fa-thumbs-up"></i>
+          <Number>{likesArr.length}</Number>
+        </Like>
+      </LastLine>
+    </Wrapper>
   );
 };
 
-export default Replie;
+export default Answer;

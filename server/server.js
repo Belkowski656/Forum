@@ -23,6 +23,39 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.post("/check-answers", async (req, res) => {
+  const { replyId } = req.body;
+
+  const answers = await Reply.find({ answerTo: replyId });
+
+  res.json({ status: "ok", answers });
+});
+
+app.post("/add-answer-to-reply", async (req, res) => {
+  const { token, topicId, title, content, answerTo } = req.body;
+
+  const user = jwt.verify(token, JWT_SECRET);
+  const _id = user.id;
+  const username = user.username;
+
+  const date = new Date();
+
+  const topic = await Topic.findOne({ _id: topicId });
+
+  await Reply.create({
+    title,
+    content,
+    replyTo: topicId,
+    creatorId: _id,
+    creatorUsername: username,
+    creationDate: date,
+    category: topic.category,
+    answerTo,
+  });
+
+  res.json({ status: "ok" });
+});
+
 app.get("/fetch-all-replies", async (req, res) => {
   const replies = await Reply.find({});
 
@@ -135,6 +168,7 @@ app.post("/add-reply", async (req, res) => {
     creatorUsername: username,
     creationDate: date,
     category: topic.category,
+    answerTo: "none",
   });
 
   res.json({ status: "ok" });
