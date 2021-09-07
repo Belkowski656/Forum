@@ -14,35 +14,6 @@ import {
 } from "./Table.style";
 
 const Table = ({ type, categories, topics, replies }) => {
-  // const [lastActivity, setLastActivity] = useState("");
-
-  // useEffect(() => {
-  //   const sortedTopics = topics.sort((a, b) => {
-  //     return new Date(b.creationDate) - new Date(a.creationDate);
-  //   });
-
-  //   const sortedReplies = replies.sort((a, b) => {
-  //     return new Date(b.creationDate) - new Date(a.creationDate);
-  //   });
-
-  //   const formatedDate = (date) => {
-  //     const lastActivityDate = new Date(date);
-  //     const day = lastActivityDate.getDate();
-  //     const month = lastActivityDate.getMonth();
-  //     const year = lastActivityDate.getFullYear();
-
-  //     setLastActivity("");
-  //   };
-
-  //   if (sortedTopics.length && sortedReplies.length) {
-  //     console.log("both");
-  //   } else if (sortedTopics.length) {
-  //     formatedDate(sortedTopics[0].creationDate);
-  //   } else if (sortedReplies.length) {
-  //     console.log("replies");
-  //   }
-  // }, [topics, replies]);
-
   return (
     <>
       <Wrapper type={type}>

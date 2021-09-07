@@ -125,6 +125,8 @@ app.post("/add-reply", async (req, res) => {
 
   const date = new Date();
 
+  const topic = await Topic.findOne({ _id: topicId });
+
   await Reply.create({
     title,
     content,
@@ -132,6 +134,7 @@ app.post("/add-reply", async (req, res) => {
     creatorId: _id,
     creatorUsername: username,
     creationDate: date,
+    category: topic.category,
   });
 
   res.json({ status: "ok" });

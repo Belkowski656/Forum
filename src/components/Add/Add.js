@@ -55,6 +55,7 @@ const Add = ({ action }) => {
           topicId,
           title,
           content,
+          category,
         }),
       }).then((res) => res.json());
 
