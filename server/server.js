@@ -29,6 +29,22 @@ app.get("/fetch-all-replies", async (req, res) => {
   res.json({ status: "ok", replies });
 });
 
+app.post("/fetch-replies-created", async (req, res) => {
+  const { userId, token } = req.body;
+
+  let replies = "";
+
+  if (userId === "me") {
+    const user = jwt.verify(token, JWT_SECRET);
+
+    replies = await Reply.find({ creatorId: user.id });
+  } else {
+    replies = await Reply.find({ creatorId: userId });
+  }
+
+  res.json({ status: "ok", replies });
+});
+
 app.post("/fetch-topics-started", async (req, res) => {
   const { userId, token } = req.body;
 
