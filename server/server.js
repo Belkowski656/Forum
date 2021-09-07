@@ -23,6 +23,28 @@ mongoose.connect("mongodb://localhost:27017/forum", {
   useUnifiedTopology: true,
 });
 
+app.get("/fetch-all-replies", async (req, res) => {
+  const replies = await Reply.find({});
+
+  res.json({ status: "ok", replies });
+});
+
+app.post("/fetch-topics-started", async (req, res) => {
+  const { userId, token } = req.body;
+
+  let topics = "";
+
+  if (userId === "me") {
+    const user = jwt.verify(token, JWT_SECRET);
+
+    topics = await Topic.find({ creatorId: user.id });
+  } else {
+    topics = await Topic.find({ creatorId: userId });
+  }
+
+  res.json({ status: "ok", topics });
+});
+
 app.post("/is-liked-reply", async (req, res) => {
   const { replyId, token } = req.body;
 

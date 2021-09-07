@@ -71,7 +71,7 @@ const Profile = () => {
             <MenuElement>
               <StyledLink to="replies">Replies Created</StyledLink>
             </MenuElement>
-            {userId === "ok" ? (
+            {userId === "me" ? (
               <>
                 <MenuElement>
                   <StyledLink to="edit">Edit Profile</StyledLink>
