@@ -17,9 +17,11 @@ import {
   Date,
   User,
   Img,
+  ImgError,
   Username,
   TextWrapper,
   Text,
+  TextError,
   Thumb,
   Like,
   Number,
@@ -28,6 +30,8 @@ import {
   Box,
   Login,
 } from "./Topic.style";
+
+import img from "../../resources/images/empty.png";
 
 const Topic = () => {
   const [title, setTitle] = useState("");
@@ -167,19 +171,27 @@ const Topic = () => {
         </Post>
         <RepliesTitle>Replies</RepliesTitle>
         <Replies>
-          {replies.map((reply, i) => (
-            <Reply
-              key={i}
-              id={reply._id}
-              title={reply.title}
-              content={reply.content}
-              creatorId={reply.creatorId}
-              creatorUsername={reply.creatorUsername}
-              creationDate={reply.creationDate}
-              likes={reply.likes}
-              answerTo={reply.answerTo}
-            />
-          ))}
+          {replies.length ? (
+            replies.map((reply, i) => (
+              <Reply
+                key={i}
+                id={reply._id}
+                title={reply.title}
+                content={reply.content}
+                creatorId={reply.creatorId}
+                creatorUsername={reply.creatorUsername}
+                creationDate={reply.creationDate}
+                likes={reply.likes}
+                answerTo={reply.answerTo}
+              />
+            ))
+          ) : (
+            <>
+              <TextError>There is no reply for this topic yet.</TextError>
+              <ImgError img={img} />
+            </>
+          )}
+
           <Box>
             {logged ? (
               <Add action="reply" />
