@@ -1,3 +1,7 @@
+import TimeAgo from "timeago-react";
+import * as timeago from "timeago.js";
+import vi from "timeago.js/lib/lang/en_US";
+
 import {
   Wrapper,
   FirstRow,
@@ -12,6 +16,8 @@ import {
   TdTime,
   StyledLink,
 } from "./Table.style";
+
+timeago.register("vi", vi);
 
 const Table = ({ type, categories, topics, replies }) => {
   return (
@@ -63,26 +69,30 @@ const Table = ({ type, categories, topics, replies }) => {
               ))
             : null}
           {type === "topic"
-            ? topics.map((topic, i) => (
-                <Row key={i}>
-                  <Td>
-                    <Title to={`/topic/${topic._id}`}>{topic.title}</Title>
-                    <Description>{topic.content}</Description>
-                  </Td>
-                  <TdUser>
-                    <StyledLink to={`/profile/${topic.creatorId}`}>
-                      {topic.creatorUsername}
-                    </StyledLink>
-                  </TdUser>
-                  <TdNumber>
-                    {
-                      replies.filter((reply) => reply.replyTo === topic._id)
-                        .length
-                    }
-                  </TdNumber>
-                  <TdTime>3 weeks, 5 days ago</TdTime>
-                </Row>
-              ))
+            ? topics
+                .map((topic, i) => (
+                  <Row key={i}>
+                    <Td>
+                      <Title to={`/topic/${topic._id}`}>{topic.title}</Title>
+                      <Description>{topic.content}</Description>
+                    </Td>
+                    <TdUser>
+                      <StyledLink to={`/profile/${topic.creatorId}`}>
+                        {topic.creatorUsername}
+                      </StyledLink>
+                    </TdUser>
+                    <TdNumber>
+                      {
+                        replies.filter((reply) => reply.replyTo === topic._id)
+                          .length
+                      }
+                    </TdNumber>
+                    <TdTime>
+                      <TimeAgo datetime={topic.creationDate} locale="vi" />
+                    </TdTime>
+                  </Row>
+                ))
+                .reverse()
             : null}
         </tbody>
       </Wrapper>
