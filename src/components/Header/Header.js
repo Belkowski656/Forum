@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   Wrapper,
   LogoWrapper,
@@ -13,6 +15,15 @@ import {
 } from "./Header.style";
 
 const Header = ({ title, text, type }) => {
+  const [search, setSearch] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleSearch = () => {
+    if (!search) return setError(true);
+    setError(false);
+    document.location.href = `/search/${search}`;
+  };
+
   return (
     <>
       <Wrapper>
@@ -23,12 +34,21 @@ const Header = ({ title, text, type }) => {
           <Box>
             <Title>{title}</Title>
             <Text>{text}</Text>
-            {type === "forum" || type === "topic" || type === "user" ? (
+            {type === "forum" ||
+            type === "topic" ||
+            type === "user" ||
+            type === "search" ? (
               <Empty />
             ) : (
               <Search>
-                <Input type="text" placeholder="Enter a keyword..." />
-                <Button>
+                <Input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  type="text"
+                  placeholder="Enter a keyword..."
+                  error={error}
+                />
+                <Button onClick={handleSearch}>
                   <i className="fas fa-search"></i>
                 </Button>
               </Search>

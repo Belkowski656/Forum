@@ -70,7 +70,10 @@ export const Input = styled.input`
   width: calc(100% - 64px);
   height: 64px;
   background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: ${({ error }) =>
+    error
+      ? "1px solid rgba(255, 0, 0, 1)"
+      : "1px solid rgba(255, 255, 255, 0.1)"};
   padding: 10px;
   color: white;
   font-size: ${fontMedium};

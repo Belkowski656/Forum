@@ -14,6 +14,7 @@ import Informations from "./components/Informations/Informations";
 import Seciurity from "./components/Seciurity/Seciurity";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import Search from "./components/Search/Search";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 import { GlobalStyles } from "./GlobalStyles";
@@ -51,6 +52,7 @@ const App = () => {
                   <Route path="seciurity" element={<Seciurity />} />
                 </Route>
               </Route>
+              <Route path="/search/:keyword" element={<Search />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>
