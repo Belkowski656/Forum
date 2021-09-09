@@ -366,7 +366,7 @@ app.post("/confirm-password", async (req, res) => {
     from: "belkowski656@gmail.com",
     to: email,
     subject: "Confirm Password Change to Forum",
-    text: `<h2>Your verification code to change password is ${verifyCode}</h2>`,
+    html: `<h2>Your verification code to change password is ${verifyCode}</h2>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -430,7 +430,7 @@ app.post("/confirm-email", async (req, res) => {
     from: "belkowski656@gmail.com",
     to: email,
     subject: "Confirm Email Change to Forum",
-    text: `<h2>Your verification code to change email is ${verifyCode}</h2>`,
+    html: `<h2>Your verification code to change email is ${verifyCode}</h2>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
@@ -625,7 +625,7 @@ app.post("/verify-code", async (req, res) => {
     from: "belkowski656@gmail.com",
     to: email,
     subject: "Confirm registrations to Forum",
-    text: `<h2>Your verification code is ${verifyCode}</h2>`,
+    html: `<h2>Your verification code is ${verifyCode}</h2>`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
