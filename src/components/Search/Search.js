@@ -22,7 +22,7 @@ const Search = () => {
 
       if (result.status === "ok") {
         const topicsMatchingKeyword = result.topics.filter((topic) =>
-          topic.title.includes(keyword)
+          topic.title.toLowerCase().includes(keyword.toLowerCase())
         );
         console.log(result.topics);
         console.log(topicsMatchingKeyword);
