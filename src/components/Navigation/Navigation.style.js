@@ -28,8 +28,10 @@ export const Content = styled.div`
   align-items: center;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
   display: none;
+  text-decoration: none;
+  color: white;
   @media (min-width: 992px) {
     display: block;
     text-transform: uppercase;
@@ -123,6 +125,10 @@ export const User = styled.button`
 
   @media (min-width: 992px) {
     background-color: ${gray};
+
+    :hover {
+      color: ${blue};
+    }
   }
 `;
 
