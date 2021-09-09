@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router";
 import DataContext from "../../Context/dataContext";
 
 import {
@@ -20,6 +21,10 @@ const ProfileInfo = () => {
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
   const [username, setUsername] = useState("");
+  const [topics, setTopics] = useState([]);
+  const [replies, setReplies] = useState([]);
+
+  const { userId } = useParams();
 
   const userData = useContext(DataContext);
 
@@ -54,6 +59,41 @@ const ProfileInfo = () => {
     setUsername(userData.username);
   }, [userData]);
 
+  useEffect(() => {
+    const fetchTopicsStarted = async () => {
+      const result = await fetch("/fetch-topics-started", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: sessionStorage.getItem("token"),
+          userId,
+        }),
+      }).then((res) => res.json());
+
+      if (result.status === "ok") {
+        setTopics(result.topics);
+      }
+    };
+
+    const fetchRepliesCreated = async () => {
+      const result = await fetch("/fetch-replies-created", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: sessionStorage.getItem("token"),
+          userId,
+        }),
+      }).then((res) => res.json());
+
+      if (result.status === "ok") {
+        setReplies(result.replies);
+      }
+    };
+
+    fetchRepliesCreated();
+    fetchTopicsStarted();
+  }, [userId]);
+
   return (
     <>
       <Wrapper>
@@ -70,14 +110,14 @@ const ProfileInfo = () => {
               <i className="fas fa-comments"></i>
             </Icon>
             <StatText>Topics Started</StatText>
-            <StatValue>19</StatValue>
+            <StatValue>{topics.length}</StatValue>
           </StatBox>
           <StatBox>
             <Icon>
               <i className="fas fa-comment"></i>
             </Icon>
             <StatText>Replies Created</StatText>
-            <StatValue>28</StatValue>
+            <StatValue>{replies.length}</StatValue>
           </StatBox>
         </Stats>
         <Informations>

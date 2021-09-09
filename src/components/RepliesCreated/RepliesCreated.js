@@ -45,17 +45,6 @@ const RepliesCreated = () => {
       ) : (
         <p>Error</p>
       )}
-      {/* id, */}
-      {/* // title,
-    // content,
-    // creatorUsername,
-    // likes,
-    // creationDate,
-    // creatorId, */}
-      {/* <Reply />
-      <Reply />
-      <Reply />
-      <Reply /> */}
     </>
   );
 };
