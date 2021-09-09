@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
 import Reply from "../Reply/Reply";
+
+import { TextError, ImgError } from "./RepliesCreated.style";
+
+import img from "../../resources/images/empty.png";
 
 const RepliesCreated = () => {
   const [replies, setReplies] = useState([]);
@@ -43,7 +48,10 @@ const RepliesCreated = () => {
           />
         ))
       ) : (
-        <p>Error</p>
+        <>
+          <TextError>There is no reply created yet.</TextError>
+          <ImgError img={img} />
+        </>
       )}
     </>
   );

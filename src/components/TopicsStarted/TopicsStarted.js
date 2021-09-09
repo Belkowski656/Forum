@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
 import Table from "../Table/Table";
+
+import { TextError, ImgError } from "./TopicsStarted.style";
+
+import img from "../../resources/images/empty.png";
 
 const TopicsStarted = () => {
   const [topics, setTopics] = useState([]);
@@ -42,7 +47,12 @@ const TopicsStarted = () => {
     <>
       {topics.length ? (
         <Table type={"topic"} topics={topics} replies={replies} />
-      ) : null}
+      ) : (
+        <>
+          <TextError>There is no topic started yet.</TextError>
+          <ImgError img={img} />
+        </>
+      )}
     </>
   );
 };
