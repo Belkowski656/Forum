@@ -25,7 +25,7 @@ const RepliesCreated = () => {
 
     fetchRepliesCreated();
   }, [userId]);
-
+  console.log(replies);
   return (
     <>
       {replies.length ? (

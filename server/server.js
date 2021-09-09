@@ -297,7 +297,7 @@ app.post("/change-avatar", upload.single("avatar"), async (req, res) => {
         avatar: image,
       }
     );
-    res.redirect("/profile/edit");
+    res.redirect("/profile/me/edit");
   } catch (error) {
     res.end({ status: "error", error: error });
   }

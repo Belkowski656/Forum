@@ -29,6 +29,7 @@ const Replie = ({
   creationDate,
   creatorId,
   answerTo,
+  type,
 }) => {
   const [date, setDate] = useState("");
   const [img, setImg] = useState("");
@@ -135,7 +136,7 @@ const Replie = ({
 
   return (
     <>
-      {answerTo === "none" ? (
+      {answerTo === "none" || type === "profile" ? (
         <Wrapper>
           <FirstLine>
             <H4>{title}</H4>
@@ -149,7 +150,9 @@ const Replie = ({
             <Text>{content}</Text>
           </TextWrapper>
           <LastLine>
-            <ReplyTo onClick={() => setReply(true)}>Reply</ReplyTo>
+            {type === "profile" ? null : (
+              <ReplyTo onClick={() => setReply(true)}>Reply</ReplyTo>
+            )}
             <Like onClick={() => toggleLike("")} active={isLiked}>
               <i className="fas fa-thumbs-up"></i>
               <Number>{likesArr.length}</Number>
