@@ -16,9 +16,10 @@ const Search = () => {
 
   useEffect(() => {
     const fetchTopicsAndReplies = async () => {
-      const result = await fetch("/fetch-topics-and-replies").then((res) =>
-        res.json()
-      );
+      const result = await fetch("/fetch-topics-and-replies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
 
       if (result.status === "ok") {
         const topicsMatchingKeyword = result.topics.filter((topic) =>

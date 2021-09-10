@@ -30,9 +30,10 @@ const TopicsStarted = () => {
     };
 
     const fetchAllReplies = async () => {
-      const result = await fetch("/fetch-all-replies").then((res) =>
-        res.json()
-      );
+      const result = await fetch("/fetch-all-replies", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
 
       if (result.status === "ok") {
         setReplies(result.replies);

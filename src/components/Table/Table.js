@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import TimeAgo from "timeago-react";
 import * as timeago from "timeago.js";
 import vi from "timeago.js/lib/lang/en_US";
@@ -21,18 +20,6 @@ import {
 timeago.register("vi", vi);
 
 const Table = ({ type, categories, topics, replies }) => {
-  useEffect(() => {
-    if (type === "category") {
-      // if (topicsFromCategory.length && repliesFromCategory.length) {
-      //   const sortedTopics = topicsFromCategory.sort((a, b) => {
-      //     return new Date(b.dateOfCreation) - new Date(a.dateOfCreation);
-      //   });
-      //   console.log(categories);
-      // } else {
-      // }
-    }
-  }, [categories, topics, replies, type]);
-
   return (
     <>
       <Wrapper type={type}>
