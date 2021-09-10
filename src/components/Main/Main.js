@@ -58,7 +58,10 @@ const Main = () => {
 
   useEffect(() => {
     const fetchTopicsAndRepliesAndUsers = async () => {
-      const result = await fetch("/fetch-data").then((res) => res.json());
+      const result = await fetch("/fetch-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
 
       if (result.status === "ok") {
         setTopics(result.topics);
