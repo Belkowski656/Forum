@@ -143,18 +143,26 @@ export const Replie = styled.div`
 export const Box = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   max-width: 1400px;
-  margin: 50px auto;
+  margin: 0 auto;
 `;
 
 export const Login = styled(Link)`
+  display: block;
   text-decoration: none;
   color: white;
   background-color: ${blue};
   padding: 10px 20px;
   font-weight: bold;
   margin-top: 20px;
+`;
+
+export const TextLogin = styled.p`
+  text-align: center;
+  font-size: ${fontStandard};
 `;
 
 export const TextError = styled.p`

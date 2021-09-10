@@ -29,6 +29,7 @@ import {
   RepliesTitle,
   Box,
   Login,
+  TextLogin,
 } from "./Topic.style";
 
 import img from "../../resources/images/empty.png";
@@ -113,6 +114,8 @@ const Topic = () => {
 
   useEffect(() => {
     const checkIsLiked = async () => {
+      if (!logged) return;
+
       const result = await fetch("/is-liked", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -128,9 +131,11 @@ const Topic = () => {
     };
 
     checkIsLiked();
-  }, [likes, topicId]);
+  }, [likes, topicId, logged]);
 
   const toggleLike = async () => {
+    if (!logged) return;
+
     const result = await fetch("/toggle-like", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -163,10 +168,21 @@ const Topic = () => {
             <Text>{content}</Text>
           </TextWrapper>
           <Thumb>
-            <Like onClick={toggleLike} active={isLiked}>
-              <i className="fas fa-thumbs-up"></i>
-              <Number>{likes.length}</Number>
-            </Like>
+            {logged ? (
+              <Like onClick={toggleLike} active={isLiked}>
+                <i className="fas fa-thumbs-up"></i>
+                <Number>{likes.length}</Number>
+              </Like>
+            ) : (
+              <>
+                <Box>
+                  <TextLogin>
+                    You must be logged in to add reply and like.
+                  </TextLogin>
+                  <Login to="/login">Login</Login>
+                </Box>
+              </>
+            )}
           </Thumb>
         </Post>
         <RepliesTitle>Replies</RepliesTitle>
@@ -197,7 +213,7 @@ const Topic = () => {
               <Add action="reply" />
             ) : (
               <>
-                <Text>You must be logged in to add a topic</Text>
+                <TextLogin>You must be logged in to add a topic</TextLogin>
                 <Login to="/login">Login</Login>
               </>
             )}

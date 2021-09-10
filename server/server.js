@@ -285,8 +285,6 @@ app.post("/change-avatar", upload.single("avatar"), async (req, res) => {
   const image = req.file.filename;
   const token = req.body.token;
 
-  console.log(token);
-
   try {
     const user = jwt.verify(token, JWT_SECRET);
     const _id = user.id;
@@ -555,7 +553,6 @@ app.post("/login", async (req, res) => {
 
     res.json({ status: "error", error: "Invalid username or password." });
   } catch (error) {
-    console.log(error);
     res.json({
       status: "error",
       error: "Something went wrong. Try again later.",

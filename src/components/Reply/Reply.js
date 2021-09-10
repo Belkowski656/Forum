@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import LoggedContext from "../../Context/loggedContext";
 
 import Add from "../Add/Add";
 import Answer from "../Answer/Answer";
@@ -37,6 +38,8 @@ const Replie = ({
   const [isLiked, setIsLiked] = useState(false);
   const [reply, setReply] = useState(false);
   const [answers, setAnswers] = useState([]);
+
+  const logged = useContext(LoggedContext).logged;
 
   useEffect(() => {
     const months = [
@@ -84,6 +87,8 @@ const Replie = ({
 
   useEffect(() => {
     const checkIsLiked = async () => {
+      if (!logged) return;
+
       const result = await fetch("/is-liked-reply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -99,7 +104,7 @@ const Replie = ({
     };
 
     checkIsLiked();
-  }, [likesArr, id]);
+  }, [likesArr, id, logged]);
 
   useEffect(() => {
     const checkAnswers = async () => {
@@ -120,6 +125,8 @@ const Replie = ({
   }, [id]);
 
   const toggleLike = async () => {
+    if (!logged) return;
+
     const result = await fetch("/toggle-like-reply", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -150,7 +157,7 @@ const Replie = ({
             <Text>{content}</Text>
           </TextWrapper>
           <LastLine>
-            {type === "profile" ? null : (
+            {type === "profile" || !logged ? null : (
               <ReplyTo onClick={() => setReply(true)}>Reply</ReplyTo>
             )}
             <Like onClick={() => toggleLike("")} active={isLiked}>
