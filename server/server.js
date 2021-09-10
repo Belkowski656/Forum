@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const uuid = require("uuid").v4;
+const path = require("path");
 
 const User = require("./models/user");
 const Topic = require("./models/topic");
@@ -18,10 +19,23 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost:27017/forum", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+try {
+  mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  });
+} catch (err) {
+  console.log(err);
+}
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+
+  app.get("/*", (req, res) => {
+    res.sendFile(path.resolve("build", "index.html"));
+  });
+}
 
 app.post("/check-answers", async (req, res) => {
   const { replyId } = req.body;
