@@ -1,5 +1,5 @@
-const emailPassword = require("./hiddenData").password;
-const JWT_SECRET = require("./hiddenData").JWT_SECRET;
+const emailPassword = process.env.PASSWORD;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const express = require("express");
 const nodemailer = require("nodemailer");
