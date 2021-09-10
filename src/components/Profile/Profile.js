@@ -26,6 +26,7 @@ const Profile = () => {
   const { userId } = useParams();
 
   const setLogged = useContext(LoggedContext).setLogged;
+  const logged = useContext(LoggedContext).logged;
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
@@ -53,6 +54,10 @@ const Profile = () => {
   }, [userId]);
 
   useEffect(() => fetchUserData(), [fetchUserData]);
+
+  useEffect(() => {
+    if (userId === "me" && !logged) document.location.href = "/";
+  });
 
   return (
     <>
