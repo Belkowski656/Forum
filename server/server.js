@@ -69,7 +69,7 @@ app.post("/add-answer-to-reply", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.get("/fetch-all-replies", async (req, res) => {
+app.post("/fetch-all-replies", async (req, res) => {
   const replies = await Reply.find({});
 
   res.json({ status: "ok", replies });
@@ -226,7 +226,7 @@ app.post("/toggle-like", async (req, res) => {
   res.json({ status: "ok", likes: topicLikes.likes });
 });
 
-app.get("/fetch-topics-and-replies", async (req, res) => {
+app.post("/fetch-topics-and-replies", async (req, res) => {
   const topics = await Topic.find({});
   const replies = await Reply.find({});
 
@@ -242,7 +242,7 @@ app.post("/fetch-category-data", async (req, res) => {
   res.json({ status: "ok", topics, replies });
 });
 
-app.get("/fetch-data", async (req, res) => {
+app.post("/fetch-data", async (req, res) => {
   const topics = await Topic.find({});
   const replies = await Reply.find({});
   const users = await User.find({});
