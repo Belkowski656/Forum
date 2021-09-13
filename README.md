@@ -3,7 +3,7 @@ Forum Application
 
 This is a MERN Stack forum application that provides the main functions you'd expect from a forum.
 
-![Forum Preview](https://ams02pap001files.storage.live.com/y4mRdpu_Ugh1hSOtdlEe3uzsOgeIbpaQLdbpEMpOym3F7ec6iNN1Je454zJei9gXrbA-Bh68hw31thcXzd-YV3xALMBYeN72LCrK9-HuFjgC413u_9OziqHtiLmNlclg4lOhGbPnRAeqV6LlZgJHZRcj8evXLjVJ_Xl7EsFjOxdEKBkwyo2v7VdtcJcoj1iYt5J?width=512&height=512&cropmode=none)
+![Forum Preview](https://ams02pap001files.storage.live.com/y4m7fXrJkCZYumhq7gxdAp3PySEKYkp18tupjVTiTWX3xlrEijS5Q6pebZDTxdS--ZR3E2dasCIQEGqPr4EqJ-bN79llkPcrk96P8ZPxp5L0Z35RnTqny6VaWTSFB7jcLujC-LwH6fHKYgYFEzrrqoDjjUzaCf2p0Kc621L2CyzkKKBlj1eBkKKdi1Rafltsm_P?width=1920&height=1080&cropmode=none)
 
 ---
 
