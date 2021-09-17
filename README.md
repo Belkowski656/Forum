@@ -12,7 +12,7 @@ This is a MERN Stack forum application that provides the main functions you'd ex
 - Login,
 - stay logged in option,
 - registration confirmed by email,
-- User can change password, email, profile picture and other personal informations,
+- User can change password, email and other personal informations,
 - adding posts,
 - adding repies,
 - liking posts and replies,
