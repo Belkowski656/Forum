@@ -3,18 +3,15 @@ import { useEffect, useState } from "react";
 import {
   Wrapper,
   Form,
-  Label,
   Input,
   Radio,
   SmallLabel,
-  Avatar,
   Save,
   Error,
   Box,
   Text,
   Change,
   Cancel,
-  InputToken,
 } from "./Informations.style";
 
 const Informations = () => {
@@ -31,7 +28,6 @@ const Informations = () => {
   const [showUsername, setShowUsername] = useState(false);
   const [showDateOfBirth, setShowDateOfBirth] = useState(false);
   const [showGender, setShowGender] = useState(false);
-  const [showFile, setShowFile] = useState(false);
 
   const [now, setNow] = useState("");
 
@@ -274,33 +270,6 @@ const Informations = () => {
               </Cancel>
             </Form>
           ) : null}
-        </Box>
-        <Box>
-          <Form
-            action="/change-avatar"
-            method="POST"
-            encType="multipart/form-data"
-          >
-            <Label htmlFor="avatar">Avatar</Label>
-            <Avatar
-              id="avatar"
-              name="avatar"
-              accept="image/*"
-              type="file"
-              onClick={() => setShowFile(true)}
-            />
-            <InputToken
-              type="text"
-              defaultValue={sessionStorage.getItem("token")}
-              name="token"
-            />
-            <div>
-              {showFile ? <Save>Save</Save> : null}
-              {showFile ? (
-                <Cancel onClick={() => setShowFile(false)}>Cancle</Cancel>
-              ) : null}
-            </div>
-          </Form>
         </Box>
       </Wrapper>
     </>
