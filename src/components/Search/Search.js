@@ -6,7 +6,9 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Table from "../Table/Table";
 
-import { Wrapper, Box } from "./Search.style";
+import { Wrapper, Box, TextError, ImgError } from "./Search.style";
+
+import img from "../../resources/images/empty.png";
 
 const Search = () => {
   const [topics, setTopics] = useState([]);
@@ -44,7 +46,15 @@ const Search = () => {
         type={"search"}
       />
       <Wrapper>
-        <Table type={"topic"} topics={topics} replies={replies} />
+        {topics.length ? (
+          <Table type={"topic"} topics={topics} replies={replies} />
+        ) : (
+          <>
+            {" "}
+            <TextError>There is no reply created yet.</TextError>
+            <ImgError img={img} />
+          </>
+        )}
       </Wrapper>
       <Box />
       <Footer />
