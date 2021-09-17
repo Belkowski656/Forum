@@ -50,8 +50,7 @@ const Search = () => {
           <Table type={"topic"} topics={topics} replies={replies} />
         ) : (
           <>
-            {" "}
-            <TextError>There is no reply created yet.</TextError>
+            <TextError>Nothing match "{keyword}"</TextError>
             <ImgError img={img} />
           </>
         )}
