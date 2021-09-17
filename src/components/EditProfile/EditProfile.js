@@ -18,7 +18,7 @@ const EditProfile = () => {
     <>
       <Wrapper>
         <Menu>
-          <StyledLink to={`/profile/${userId}edit`}>Informations</StyledLink>
+          <StyledLink to={`/profile/${userId}/edit`}>Informations</StyledLink>
           <StyledLink to="seciurity">Seciurity</StyledLink>
         </Menu>
         <Outlet />
